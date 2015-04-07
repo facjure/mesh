@@ -1,9 +1,13 @@
 .lein-*
+.repl*
 pom.xml
 *jar
 /lib/
+*.log
+js*
 /classes/
 /target/
+/node_modules
 /checkouts/
 .lein-deps-sum
 .lein-repl-history
