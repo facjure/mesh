@@ -1,7 +1,7 @@
 (ns dev.repl
   (:require-macros
    [figwheel.client.utils :refer [enable-dev-blocks!]])
-  (:require [mesh.ui :as ui]
+  (:require [examples.om.page :as main]
             [figwheel.client :as fw]))
 
 (enable-console-print!)

@@ -5,8 +5,10 @@ A Responsive Grid & Typography toolkit for Clojurescript.
 
 ## Quickstart
 
-	lein dev
+To Run examples (om)
 
+	lein dev
+	
 ## Contributing
 
 Mesh is currently in the design phase. 
@@ -29,6 +31,7 @@ A big thanks to Joel Holbrooks for creating Garden, and David Nolen for everythi
 
 ## Status
 
+_Research_
 
 ## License
 
