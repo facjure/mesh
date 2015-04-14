@@ -21,7 +21,7 @@
         (grid/create ".grid")
         (grid/wrap-widths 978)
         (mixins/clearfix ".grid")
-        (grid/fit-images ".unit")
+        (mixins/fit-images ".unit")
         (grid/create-nested-units)
         (grid/nuke-gutters-and-padding)
         (grid/respond-small (px 568) gutter)

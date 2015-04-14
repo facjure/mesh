@@ -27,3 +27,7 @@
    [:.align-right {:text-align "right"}]
    [:.pull-left {:float "left"}]
    [:.pull-right {:float "right"}]])
+
+(defn fit-images [clazz]
+  [clazz
+   [:img {:max-width "100%"}]])

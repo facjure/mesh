@@ -71,10 +71,6 @@
    [clazz
     [:.golden-large {:width "61.7283%"}]]])
 
-(defn fit-images [clazz]
-  [clazz
-   [:img {:max-width "100%"}]])
-
 (defn respond-small [width gutter]
   (at-media {:screen true :max-width width}
             [".grid:not(.no-stacking-on-mobiles)"
