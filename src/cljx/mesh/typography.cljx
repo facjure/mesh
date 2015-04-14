@@ -1,7 +1,7 @@
 (ns mesh.typography
+  #+clj
   (:refer-clojure :exclude [+ - * / rem])
-  (:require [garden.def :refer [defstyles defrule defkeyframes]]
-            [garden.core :refer [css]]
+  (:require [garden.core :refer [css]]
             [garden.units :as u :refer [px pt]]
             [garden.units :refer (px+ px* px- px-div em rem)]
             [garden.arithmetic :refer [+ - * /]]

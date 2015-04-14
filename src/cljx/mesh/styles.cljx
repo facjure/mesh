@@ -1,4 +1,5 @@
 (ns mesh.styles
+  #+clj
   (:require [garden.def :refer [defstyles defrule defkeyframes]]
             [garden.core :refer [css]]
             [mesh.typography :as typography]

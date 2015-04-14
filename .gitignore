@@ -2,6 +2,7 @@ resources/public/js
 resources/public/css/mesh.css
 .lein-*
 .repl*
+.nrepl*
 pom.xml
 *jar
 /lib/
