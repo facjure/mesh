@@ -1,7 +1,9 @@
 (ns examples.om.page
   (:require [om.core :as om :include-macros true]
             [om.dom :as dom :include-macros true]
-            [sablono.core :as html :refer-macros [html]]))
+            [sablono.core :as html :refer-macros [html]]
+            [mesh.utils :as utils]
+            [examples.om.styles :as styles]))
 
 (enable-console-print!)
 
@@ -101,6 +103,8 @@
     (render-state [_ {:keys [count]}]
       (println "Render!")
       (html (page)))))
+
+(utils/insert-stylesheet styles/index)
 
 (om/root widget app-state
          {:target (.getElementById js/document "app")})

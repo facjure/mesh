@@ -1,5 +1,4 @@
 (ns mesh.grid
-  #+clj
   (:refer-clojure :exclude [+ - * /])
   (:require [garden.core :refer [css]]
             [garden.units :as u :refer [px pt]]
