@@ -9,8 +9,9 @@
 
 (def app-state (atom {:foo "bar"}))
 
-(defn fractional-grids []
+(defn fluid-grids []
   [:div
+   [:h2 "Fluid/Fractional Grids"]
    [:div {:class "grid"}
     [:div {:class "unit whole"}
      [:pre ".whole"]]]
@@ -83,12 +84,41 @@
          [:pre "***"]]]]
       [:div {:class "unit one-fifth"} "***"]]]]])
 
-(defn page []
+(defn view [grid-component]
   [:section {:class "demo"}
-   (fractional-grids)
-   (nested-grids)])
+   (grid-component)])
 
-(defn widget [data owner]
+(defn empty-widget [data owner]
+  (reify
+    om/IRenderState
+    (render-state [_ {:keys [count]}]
+      (println "Unmounting!")
+      (html [:div ""]))))
+
+(defn fluid-widget [data owner]
+  (reify
+    om/IWillMount
+    (will-mount [_]
+      (println "Fluid widget mounting"))
+    om/IRenderState
+    (render-state [_ {:keys [count]}]
+      (println "Render!")
+      (html (view fluid-grids)))))
+
+(defn nested-widget [data owner]
+  (reify
+    om/IWillMount
+    (will-mount [_]
+      (println "Nested widget mounting"))
+    om/IWillUnmount
+    (will-unmount [_]
+      (println "Hello widget unmounting"))
+    om/IRenderState
+    (render-state [_ {:keys [count]}]
+      (println "Render!")
+      (html (view nested-grids)))))
+
+(defn diy-widget [data owner]
   (reify
     om/IInitState
     (init-state [_]
@@ -102,9 +132,24 @@
     om/IRenderState
     (render-state [_ {:keys [count]}]
       (println "Render!")
-      (html (page)))))
+      (html (section fluid-grids)))))
 
-(utils/insert-stylesheet styles/index)
+(defn mount [widget id]
+  (om/root
+   widget
+   app-state
+   {:target (.getElementById js/document id)}))
 
-(om/root widget app-state
-         {:target (.getElementById js/document "app")})
+(defn unmount [id]
+  (om/root
+   empty-widget
+   app-state
+   {:target (.getElementById js/document id)}))
+
+(mount fluid-widget "fluid")
+
+(mount nested-widget "nested")
+
+(unmount "fluid")
+
+#_(utils/insert-stylesheet styles/index)
