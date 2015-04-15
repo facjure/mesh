@@ -2,7 +2,7 @@
   (:require [garden.core :refer [css]]
             [garden.units :as u :refer [px pt]]
             [mesh.mixins :as mixins]
-            [mesh.typography :refer [typeset]]
+            [mesh.typography :as typo :refer [typeset]]
             [mesh.grid :as grid]))
 
 (def gutter (px 20))
