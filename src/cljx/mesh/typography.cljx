@@ -42,7 +42,7 @@
    :double-octave 4})
 
 (def defaults
-  {:line-height-ratio 1.75
+  {:line-height-ratio 1.45
    :header-ratio (:golden scales)
    :min-width (px 400)
    :max-width (px 1200)
@@ -64,10 +64,12 @@
    :line-height (em leading)
    :text-transform (get options :text-transform "none")})
 
-(defn overlay [color offset]
-  [:body {:backround color
-          :background-size [["100%" (em (:line-height-ratio defaults))]]
-          :background-position [[0 (px offset)]]}])
+(defn baseline-overlay [color offset]
+  ;; TODO: implement a real func in Garden
+  (let [linear-gradient (str "linear-gradient(to top, " color " 5%, white 5%)")]
+    [:body {:background-position [[0 (px offset)]]
+            :background-size [["100%" (em (:line-height-ratio defaults))]]
+            :background linear-gradient}]))
 
 ;; http://madebymike.com.au/writing/precise-control-responsive-typography/
 ;; calc(a + (b - x) * ((100vw - d) / (e - f))
@@ -105,6 +107,16 @@
            :font-size (:min-font conf)}]
    (at-media {:min-width (:min-width conf)}
              [:html {:font-size (* (scale scales) (:min-font conf))}])])
+
+
+(def reset
+  {:margin 0
+   :padding 0})
+
+(defn vertical-unit[]
+
+  )
+
 
 (defn typeset [serif sans mono]
   [[:body :p (font sans 1 300 0.1 1.5)]

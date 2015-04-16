@@ -84,6 +84,27 @@
          [:pre "***"]]]]
       [:div {:class "unit one-fifth"} "***"]]]]])
 
+(defn baseline-grid []
+  [:div
+   [:div {:class "grid"}
+    [:div {:class "unit one-half align-right"}
+     [:h2 "Baseline Grids"]
+     [:p
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+Iure atque, optio fuga voluptates officia alias excepturi vero consectetur 
+numquam sunt, cupiditate ad vitae facilis amet officiis debitis dignissimos!
+ Id, quisquam? Lorem"]]
+    [:p
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+Iure atque, optio fuga voluptates officia alias excepturi vero consectetur 
+numquam sunt, cupiditate ad vitae facilis amet officiis debitis dignissimos!
+ Id, quisquam? Lorem"]
+    [:p
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+Iure atque, optio fuga voluptates officia alias excepturi vero consectetur 
+numquam sunt, cupiditate ad vitae facilis amet officiis debitis dignissimos!
+ Id, quisquam? Lorem"]]])
+
 (defn view [grid-component]
   [:section {:class "demo"}
    (grid-component)])
@@ -110,13 +131,20 @@
     om/IWillMount
     (will-mount [_]
       (println "Nested widget mounting"))
-    om/IWillUnmount
-    (will-unmount [_]
-      (println "Hello widget unmounting"))
     om/IRenderState
     (render-state [_ {:keys [count]}]
       (println "Render!")
       (html (view nested-grids)))))
+
+(defn baseline-widget [data owner]
+  (reify
+    om/IWillMount
+    (will-mount [_]
+      (println "Baseline widget mounting"))
+    om/IRenderState
+    (render-state [_ {:keys [count]}]
+      (println "Render!")
+      (html (view baseline-grid)))))
 
 (defn diy-widget [data owner]
   (reify
@@ -146,10 +174,12 @@
    app-state
    {:target (.getElementById js/document id)}))
 
-(mount fluid-widget "fluid")
+#_(mount fluid-widget "fluid")
 
-(mount nested-widget "nested")
+#_(mount nested-widget "nested")
 
-#_(unmount "fluid")
+(mount baseline-widget "baseline")
 
-(utils/insert-stylesheet styles/index)
+(unmount "nested")
+
+#_(utils/insert-stylesheet styles/index)

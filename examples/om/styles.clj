@@ -21,7 +21,7 @@
 
 (defstyles grids
   (list mixins/alignments
-        (typo/overlay (:aquamarine color/color-name->hex) 2)
+        (typo/baseline-overlay (:cadetblue color/color-name->hex) 0)
         (grid/initialize ".grid" gutter)
         (grid/create ".grid")
         (grid/wrap-widths 978)
