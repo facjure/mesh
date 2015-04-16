@@ -6,25 +6,18 @@
             [garden.color :as color :refer [hsl rgb]]
             [garden.arithmetic :refer [+ - * /]]
             [mesh.mixins :as mixins]
+            [mesh.respond :as respond :refer [breakpoints]]
             [mesh.typography :as typo :refer [typeset]]
             [mesh.grid :as grid]))
 
-(def ff-serif ["\"EB Garamond\"" "serif"])
-(def ff-sans ["\"Fira Sans\"" "sans-serif"])
-(def ff-mono ["\"Source Code Pro\"" "monospace"])
-
 (def gutter (px 15))
-
-(def breakpoints
-  {:mobile (px 480)
-   :tablet (px 960)
-   :laptop (px 1440)
-   :monitor (px 1920)})
 
 (defstyles typesetting
   (list
-   #_(typeset ff-serif ff-sans ff-mono)
-   (typo/typeset-html typo/defaults)))
+   #_(typeset (:garamond typo/font-families)
+              (:optima typo/font-families)
+              (:sourcecode-pro typo/font-families))
+   (typo/typeset-html typo/defaults :golden)))
 
 (defstyles grids
   (list mixins/alignments
@@ -41,8 +34,3 @@
 
 (def index
   (merge grids typesetting))
-
-(typo/typeset-html typo/defaults)
-
-;;(- (px 100) (px 90))
-

@@ -1,21 +1,24 @@
 (ns examples.om.styles
   (:require [garden.core :refer [css]]
             [garden.units :as u :refer [px pt]]
+            [garden.color :as color :refer [hsl rgb]]
+            [mesh.respond :as respond :refer [breakpoints]]
             [mesh.mixins :as mixins]
             [mesh.typography :as typo :refer [typeset]]
             [mesh.grid :as grid]))
 
 (def gutter (px 20))
 
-(def ff-serif ["\"EB Garamond\"" "serif"])
-(def ff-sans ["\"Fira Sans\"" "sans-serif"])
-(def ff-mono ["\"Source Code Pro\"" "monospace"])
-
 (def typesetting
-  (list (typeset ff-serif ff-sans ff-mono)))
+  (list
+   #_(typeset (:garamond typo/font-families)
+            (:optima typo/font-families)
+            (:sourcecode-pro typo/font-families))
+   (typo/typeset-html typo/defaults :golden)))
 
 (def grids
   (list mixins/alignments
+        (typo/overlay (:aquamarine color/color-name->hex) 2)
         (grid/initialize ".grid" gutter)
         (grid/create ".grid")
         (grid/wrap-widths 978)
@@ -23,8 +26,8 @@
         (mixins/fit-images ".unit")
         (grid/create-nested-units)
         (grid/nuke-gutters-and-padding)
-        (grid/respond-small (px 568) gutter)
-        (grid/respond-medium (px 1180))))
+        (grid/respond-small (:mobile breakpoints) gutter)
+        (grid/respond-medium (:tablet breakpoints))))
 
 (def index
   (css (merge grids typesetting)))

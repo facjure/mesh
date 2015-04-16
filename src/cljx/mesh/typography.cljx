@@ -1,18 +1,28 @@
 (ns mesh.typography
-  #+clj
   (:refer-clojure :exclude [+ - * / rem])
   (:require  [garden.compiler :refer [render-css]]
              [garden.core :refer [css]]
              [garden.units :as units :refer (px pt em rem vw)]
              [garden.arithmetic :refer [+ - * /]]
              [garden.stylesheet :refer [at-media]]
-             [mesh.utils :refer [pow]]))
+             #+clj
+             [mesh.utils :as utils :refer [pow]]
+             #+cljs
+             [mesh.utils :as utils :refer [pow viewport-w]]))
+
+#+cljs
+(enable-console-print!)
+
+(def state
+  (atom {:font-size nil}))
 
 (def font-families
   {:garamond ["\"EB Garamond\"" "Baskerville" "Georgia" "Times" "serif"]
-   :optima ["\"Optima\"" "Segoe" "Calibri" "Arial" "sans-serif"]})
+   :optima ["\"Optima\"" "Segoe" "Calibri" "Arial" "sans-serif"]
+   :firasans ["\"Fira Sans\"" "Calibri" "Arial" "sans-serif"]
+   :sourcecode-pro ["\"Source Code Pro\"" "monospace"]})
 
-(def scale
+(def scales
   {:minor-second 1.067
    :major-second 1.125
    :minor-third  1.2
@@ -33,12 +43,12 @@
 
 (def defaults
   {:line-height-ratio 1.75
-   :header-ratio (:golden scale)
+   :header-ratio (:golden scales)
    :min-width (px 400)
    :max-width (px 1200)
    :vertical-rythm true
    :min-font (px 12)
-   :max-font (px 24)
+   :max-font (px 32)
    :body-color "#666"
    :body-font (:garamond font-families)
    :body-font-weight 400
@@ -46,19 +56,35 @@
    :header-font-weight 600
    :header-color "#111"})
 
+(defn font [family size weight kerning leading & options]
+  {:font-family family
+   :font-size (rem size)
+   :font-weight weight
+   :letter-spacing (rem kerning)
+   :line-height (em leading)
+   :text-transform (get options :text-transform "none")})
+
+(defn overlay [color offset]
+  [:body {:backround color
+          :background-size [["100%" (em (:line-height-ratio defaults))]]
+          :background-position [[0 (px offset)]]}])
+
 ;; http://madebymike.com.au/writing/precise-control-responsive-typography/
 ;; calc(a + (b - x) * ((100vw - d) / (e - f))
+
+#+cljs
 (defn calc [min-font max-font min-width max-width]
-  (let [a min-font
-        b (.magnitude max-font)
-        c (.magnitude min-font)
-        d min-width
-        e (.magnitude max-width)
-        f (.magnitude min-width)
-        res (* (+ a (- b c)) (/ (- (vw 100) d) (- e f)))]
+  (println "Viewport size:" (viewport-w))
+  (let [font-diff (+ min-font (- max-font min-font))
+        vp-diff (- (px (viewport-w)) min-width)
+        wid-diff (- max-width min-width)
+        res (* font-diff (/ vp-diff wid-diff))]
+    (println "Calculated Fontsize: " (:magnitude res))
+    (swap! state assoc :font-size res)
     res))
 
-(defn typeset-html [conf]
+#+cljs
+(defn typeset-html [conf scale]
   [[:html {:font-family (:body-font conf)
            :font-weight (:body-font-weight conf)
            :color (:body-color conf)
@@ -70,18 +96,15 @@
                                       (:min-width conf)
                                       (:max-width conf))}])])
 
-(defn overlay [color offset]
-  [:body {:backround color
-          :background-size [["100%" (em (:line-height-ratio defaults))]]
-          :background-position [[0 (px offset)]]}])
-
-(defn font [family size weight kerning leading & options]
-  {:font-family family
-   :font-size (rem size)
-   :font-weight weight
-   :letter-spacing (rem kerning)
-   :line-height (em leading)
-   :text-transform (get options :text-transform "none")})
+#+clj
+(defn typeset-html [conf scale]
+  [[:html {:font-family (:body-font conf)
+           :font-weight (:body-font-weight conf)
+           :color (:body-color conf)
+           :line-height (em (:line-height-ratio conf))
+           :font-size (:min-font conf)}]
+   (at-media {:min-width (:min-width conf)}
+             [:html {:font-size (* (scale scales) (:min-font conf))}])])
 
 (defn typeset [serif sans mono]
   [[:body :p (font sans 1 300 0.1 1.5)]
