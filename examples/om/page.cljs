@@ -3,107 +3,16 @@
             [om.dom :as dom :include-macros true]
             [sablono.core :as html :refer-macros [html]]
             [mesh.utils :as utils]
+            [examples.om.components :as comp]
             [examples.om.styles :as styles]))
 
 (enable-console-print!)
 
-(def app-state (atom {:foo "bar"}))
-
-(defn fluid-grids []
-  [:div
-   [:h2 "Fluid/Fractional Grids"]
-   [:div {:class "grid"}
-    [:div {:class "unit whole"}
-     [:pre ".whole"]]]
-   [:div {:class "grid"}
-    [:div {:class "unit half"}
-     [:pre ".half"]]
-    [:div {:class "unit half"}
-     [:pre ".half"]]]
-   [:div {:class "grid"}
-    [:div {:class "unit one-third"}
-     [:pre ".one third"]]
-    [:div {:class "unit two-thirds"}
-     [:pre ".two thirds"]]]
-   [:div {:class "grid"}
-    [:div {:class "unit one-quarter"}
-     [:pre ".one-quarter"]]
-    [:div {:class "unit three-quarters"}
-     [:pre ".three-quarters"]]]
-   [:div {:class "grid"}
-    [:div {:class "unit one-fifth"}
-     [:pre ".one-fifth"]]
-    [:div {:class "unit four-fifths"}
-     [:pre ".four-fifths"]]]
-   [:div {:class "grid"}
-    [:div {:class "unit two-fifths"}
-     [:pre ".two-fifths"]]
-    [:div {:class "unit three-fifths"}
-     [:pre ".three-fifths"]]]
-   [:div {:class "grid"}
-    [:div {:class "unit golden-large"}
-     [:pre ".golden-large"]]
-    [:div {:class "unit golden-small"}
-     [:pre ".golden-small"]]]])
-
-(defn nested-grids []
-  [:div
-   [:div {:class "grid"}
-    [:div {:class "unit one-quarter align-right center-on-mobile"}
-     [:h2 "Nested Grids"]
-     [:p "Nested Grids also work, but markup gets crazy pretty soon!"]]
-    [:div {:class "unit three-quarters"}
-     [:div {:class "grid"}
-      [:div {:class "unit whole"}
-       [:p {:class "align-center"} "Gridcenption!"]]]
-     [:div {:class "grid"}
-      [:div {:class "unit one-third"}
-       [:pre "***"]]
-      [:div {:class "unit two-thirds"}
-       [:div {:class "grid"}
-        [:div {:class "unit whole"}
-         [:p {:class "align-center"} "Gridception!"]]]
-       [:div {:class "grid"}
-        [:div {:class "unit two-fifths"}
-         [:pre "***"]]
-        [:div {:class "unit three-fifths"}
-         [:pre "***"]]]]]
-     [:div {:class "grid"}
-      [:div {:class "unit four-fifths"}
-       [:div {:class "grid"}
-        [:div {:class "unit whole"}
-         [:p {:class "align-center"} "Gridception!"]]]
-       [:div {:class "grid"}
-        [:div {:class "unit one-quarter"}
-         [:pre "***"]]
-        [:div {:class "unit one-quarter"}
-         [:pre "***"]]
-        [:div {:class "unit one-quarter"}
-         [:pre "***"]]
-        [:div {:class "unit one-quarter"}
-         [:pre "***"]]]]
-      [:div {:class "unit one-fifth"} "***"]]]]])
-
-(defn baseline-grid []
-  [:div
-   [:div {:class "grid"}
-    [:div {:class "unit one-half align-right"}
-     [:h2 "Baseline Grids"]
-     [:p
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-Iure atque, optio fuga voluptates officia alias excepturi vero consectetur 
-numquam sunt, cupiditate ad vitae facilis amet officiis debitis dignissimos!
- Id, quisquam? Lorem"]]
-    [:p
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-Iure atque, optio fuga voluptates officia alias excepturi vero consectetur 
-numquam sunt, cupiditate ad vitae facilis amet officiis debitis dignissimos!
- Id, quisquam? Lorem"]
-    [:p
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-Iure atque, optio fuga voluptates officia alias excepturi vero consectetur 
-numquam sunt, cupiditate ad vitae facilis amet officiis debitis dignissimos!
- Id, quisquam? Lorem"]]])
+(def app-state
+  (atom {:fluid styles/fluid
+         :nested
+         :hello
+         :foo "bar"}))
 
 (defn view [grid-component]
   [:section {:class "demo"}
@@ -124,7 +33,7 @@ numquam sunt, cupiditate ad vitae facilis amet officiis debitis dignissimos!
     om/IRenderState
     (render-state [_ {:keys [count]}]
       (println "Render!")
-      (html (view fluid-grids)))))
+      (html (view comp/fluid-grids)))))
 
 (defn nested-widget [data owner]
   (reify
@@ -134,7 +43,7 @@ numquam sunt, cupiditate ad vitae facilis amet officiis debitis dignissimos!
     om/IRenderState
     (render-state [_ {:keys [count]}]
       (println "Render!")
-      (html (view nested-grids)))))
+      (html (view comp/nested-grids)))))
 
 (defn baseline-widget [data owner]
   (reify
@@ -144,7 +53,7 @@ numquam sunt, cupiditate ad vitae facilis amet officiis debitis dignissimos!
     om/IRenderState
     (render-state [_ {:keys [count]}]
       (println "Render!")
-      (html (view baseline-grid)))))
+      (html (view comp/baseline-grid)))))
 
 (defn diy-widget [data owner]
   (reify
@@ -160,13 +69,16 @@ numquam sunt, cupiditate ad vitae facilis amet officiis debitis dignissimos!
     om/IRenderState
     (render-state [_ {:keys [count]}]
       (println "Render!")
-      (html (section fluid-grids)))))
+      (html (section comp/fluid-grids)))))
 
-(defn mount [widget id]
-  (om/root
-   widget
-   app-state
-   {:target (.getElementById js/document id)}))
+(defn mount
+  ([widget id]
+   (mount widget id nil))
+  ([widget id style]
+   (om/root
+    widget
+    app-state
+    {:target (.getElementById js/document id)})))
 
 (defn unmount [id]
   (om/root
@@ -174,12 +86,12 @@ numquam sunt, cupiditate ad vitae facilis amet officiis debitis dignissimos!
    app-state
    {:target (.getElementById js/document id)}))
 
-#_(mount fluid-widget "fluid")
+(mount fluid-widget "fluid")
 
 #_(mount nested-widget "nested")
 
-(mount baseline-widget "baseline")
+#_(mount baseline-widget "baseline")
 
-(unmount "nested")
+#_(unmount "nested")
 
-#_(utils/insert-stylesheet styles/index)
+(utils/insert-stylesheet styles/index)
