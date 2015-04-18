@@ -19,6 +19,25 @@
      [:&:first-child {:padding-left gutter}]
      [:&:last-child {:padding-right gutter}]]]])
 
+;; https://css-tricks.com/dont-overthink-it-grids/
+(defn create-minimal-grid [clazz pad]
+  [[:* {:box-sizing "border-box"}]
+   [clazz {:background "white"
+           :margin [[0 0 pad 0]]}
+    [:&:after {:content ""
+               :display "table"
+               :clear "both"}]
+    ["[class*='col-']" {:float "left"
+                        :padding-right pad
+                        }]
+    [:.col-1-3 {:width "33.33%"}]
+    [:.col-2-3 {:width "66.66%"}]
+    [:.col-1-2 {:width "50.00%"}]
+    [:.col-1-4 {:width "25.00%"}]
+    [:.col-1-8 {:width "12.50%"}]
+    [:.out-padding {:padding [[pad 0 pad pad pad]]}
+     ["[class*='col-']:last-of-type" {:padding-right pad}]]]])
+
 (defn create-nested-units []
   [:.unit
    [:.unit
@@ -44,7 +63,7 @@
     {:max-width (px width)
      :margin "0 auto"}]])
 
-(defn create [clazz]
+(defn create-fractions [clazz]
   [[clazz
     [:.whole {:width "100%"}]]
    [clazz
@@ -69,6 +88,10 @@
     [:.golden-small {:width "38.2716%"}]]
    [clazz
     [:.golden-large {:width "61.7283%"}]]])
+
+(defn create [clazz gutter]
+  (list (initialize clazz gutter)
+        (create-fractions clazz)))
 
 (defn respond-small [width gutter]
   (at-media {:screen true :max-width width}

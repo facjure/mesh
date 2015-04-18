@@ -14,58 +14,19 @@
 (enable-console-print!)
 
 (defonce app-state
-  (atom {:msg "hello world"}))
+  (atom {:msg "Hello Garden"}))
 
 (def styles
-  (let [gutter (px 20)]
-    (list mixins/alignments
-          (grid/initialize ".grid" gutter)
-          (grid/create ".grid")
-          (grid/wrap-widths 978)
-          (mixins/clearfix ".grid")
-          (mixins/fit-images ".unit")
-          (grid/create-nested-units)
-          (grid/nuke-gutters-and-padding))))
-
-(defn baseline-grid []
-  [:div
-   [:div {:class "grid"}
-    [:div {:class "unit one-half"}
-     [:h2 "Baseline Grids"]
-     [:p
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-       Iure atque, optio fuga voluptates officia alias excepturi vero
-       consectetur numquam sunt, cupiditate ad vitae facilis amet offm"]
-     [:p
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-       Iure atque, optio fuga voluptates officia alias excepturi verom"]
-     [:p
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-       Iure atque, optio fuga voluptates officia alias excepturi vero
-       consectetur numquam sunt, cupiditate ad vitae facilis amet officiis
-       debitis dignissimos!  Id, quisquam? Lorem"]]
-    [:div {:class "unit one-half"}
-     [:p
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-       Iure atque, optio fuga voluptates officia alias excepturi vero
-       consectetur numquam sunt, cupiditate ad vitae facilis amet offm"]]
-    [:p
-     "Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-       Iure atque, optio fuga voluptates officia alias excepturi verom"]
-    [:p
-     "Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-       Iure atque, optio fuga voluptates officia alias excepturi vero
-       consectetur numquam sunt, cupiditate ad vitae facilis amet officiis
-       debitis dignissimos!  Id, quisquam? Lorem"]]])
+  (css
+   (list
+    (grid/create-minimal-grid ".grid" (px 20)))))
 
 (defn component [data owner]
   (reify
     om/IRenderState
     (render-state [_ {:keys [msg]}]
       (println msg)
-      (html
-       [:section {:class "demo"}
-        baseline-grid]))))
+      (html [:h1 (:msg data)]))))
 
 (defn mount [widget id]
   (om/root
@@ -73,6 +34,6 @@
    app-state
    {:target (.getElementById js/document id)}))
 
-#_(mount baseline-widget "baseline")
+#_(mount component "hello")
 
-#_(mesh-dom/insert-styles (css styles))
+#_(mesh-dom/insert-styles styles)
