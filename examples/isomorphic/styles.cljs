@@ -3,7 +3,8 @@
             [garden.units :as u :refer [px pt em]]
             [garden.color :as color :refer [hsl rgb]]
             [mesh.respond :as respond :refer [breakpoints]]
-            [mesh.mixins :as mixins]
+            [mesh.utils :as utils]
+            [mesh.images :as images]
             [mesh.typography :as typo]
             [mesh.grid :as grid]))
 
@@ -19,12 +20,11 @@
    (typo/typeset-html typo/defaults :golden)))
 
 (def grids
-  (list mixins/alignments
+  (list utils/alignments
         #_(typo/baseline-overlay (:aquamarine color/color-name->hex) 2)
         (grid/create ".grid" gutter)
         (grid/wrap-widths 978)
-        (mixins/clearfix ".grid")
-        (mixins/fit-images ".unit")
+        (images/fit-images ".unit")
         (grid/create-nested-units)
         (grid/nuke-gutters-and-padding)
         (grid/respond-small (:mobile breakpoints) gutter)

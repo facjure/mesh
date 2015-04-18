@@ -7,7 +7,6 @@
              [garden.color :as color :refer [hsl rgb]]
              [mesh.respond :as respond :refer [breakpoints]]
              [mesh.dom :as mesh-dom]
-             [mesh.mixins :as mixins]
              [mesh.typography :as typo :refer [typeset]]
              [mesh.grid :as grid]))
 

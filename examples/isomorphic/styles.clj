@@ -5,7 +5,8 @@
             [garden.units :as u :refer [px pt em]]
             [garden.color :as color :refer [hsl rgb]]
             [garden.arithmetic :refer [+ - * /]]
-            [mesh.mixins :as mixins]
+            [mesh.utils :as utils]
+            [mesh.images :as images]
             [mesh.respond :as respond :refer [breakpoints]]
             [mesh.typography :as typo :refer [typeset vr-block scale-type make-serifs]]
             [mesh.grid :as grid]))
@@ -22,12 +23,11 @@
    #_(typo/typeset-html typo/defaults :golden)))
 
 (defstyles grids
-  (list mixins/alignments
+  (list utils/alignments
         #_(typo/baseline-overlay (:cadetblue color/color-name->hex) 0)
         (grid/create ".grid" gutter)
         (grid/wrap-widths 978)
-        (mixins/clearfix ".grid")
-        (mixins/fit-images ".unit")
+        (images/fit-images ".unit")
         (grid/create-nested-units)
         (grid/nuke-gutters-and-padding)
         (grid/respond-small (:mobile breakpoints) gutter)

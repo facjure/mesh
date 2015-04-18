@@ -6,7 +6,7 @@
             [garden.color :as color :refer [hsl rgb]]
             [garden.arithmetic :refer [+ - * /]]
             [garden.stylesheet :refer [at-media]]
-            [mesh.mixins :refer [border-box clearfix reset-padding]]))
+            [mesh.utils :refer [border-box clearfix reset-padding]]))
 
 (defn initialize [clazz gutter]
   "Define a unit within grid with a gutter in px"
@@ -90,7 +90,8 @@
     [:.golden-large {:width "61.7283%"}]]])
 
 (defn create [clazz gutter]
-  (list (initialize clazz gutter)
+  (list (clearfix clazz)
+        (initialize clazz gutter)
         (create-fractions clazz)))
 
 (defn respond-small [width gutter]

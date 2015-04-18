@@ -6,7 +6,8 @@
             [garden.units :as u :refer [px pt em]]
             [garden.color :as color :refer [hsl rgb]]
             [mesh.dom :as mesh-dom]
-            [mesh.mixins :as mixins]
+            [mesh.utils :as utils]
+            [mesh.images :as images]
             [mesh.respond :as respond :refer [breakpoints]]
             [mesh.grid :as grid]
             [mesh.typography :as typo :refer [typeset]]))
@@ -99,11 +100,10 @@
       (typo/make-serifs typo/font-families)))
 
 (def grid-styles
-  (list mixins/alignments
+  (list utils/alignments
         (grid/create ".grid" (px 30))
         (grid/wrap-widths 1200)
-        (mixins/clearfix ".grid")
-        (mixins/fit-images ".unit")
+        (images/fit-images ".unit")
         (grid/create-nested-units)
         (grid/nuke-gutters-and-padding)
         (grid/respond-small (:mobile breakpoints) (px 20))
@@ -116,7 +116,7 @@
   (om/component
     (html [:div ""])))
 
-#_(mount component "storyboard")
+(mount component "storyboard")
 
 #_(unmount "storyboard")
 

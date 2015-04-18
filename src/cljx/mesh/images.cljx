@@ -1,5 +1,4 @@
-(ns mesh.respond
-  (:refer-clojure :exclude [+ - * /])
+(ns mesh.images
   (:require [garden.core :refer [css]]
             [garden.units :as u :refer [px pt]]
             [garden.units :refer (px+ px* px- px-div em)]
@@ -7,8 +6,6 @@
             [garden.arithmetic :refer [+ - * /]]
             [garden.stylesheet :refer [at-media]]))
 
-(def breakpoints
-  {:mobile (px 480)
-   :tablet (px 960)
-   :laptop (px 1440)
-   :monitor (px 1920)})
+(defn fit-images [clazz]
+  [clazz
+   [:img {:max-width "100%"}]])
