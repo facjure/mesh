@@ -9,10 +9,10 @@
 (enable-console-print!)
 
 (def app-state
-  (atom {:fluid styles/fluid
-         :nested
-         :hello
-         :foo "bar"}))
+  (atom {:fluid nil
+         :nested nil
+         :baseline nil
+         :content {:storyboard "Beautiful languages"}}))
 
 (defn view [grid-component]
   [:section {:class "demo"}
@@ -55,6 +55,16 @@
       (println "Render!")
       (html (view comp/baseline-grid)))))
 
+(defn storyboard-widget [data owner]
+  (reify
+    om/IWillMount
+    (will-mount [_]
+      (println "Storyboard widget mounting"))
+    om/IRenderState
+    (render-state [_ {:keys [count]}]
+      (println "Render!")
+      (html (view (comp/storyboard ()))))))
+
 (defn diy-widget [data owner]
   (reify
     om/IInitState
@@ -86,12 +96,14 @@
    app-state
    {:target (.getElementById js/document id)}))
 
-(mount fluid-widget "fluid")
+#_(mount fluid-widget "fluid")
 
 #_(mount nested-widget "nested")
 
 #_(mount baseline-widget "baseline")
 
-#_(unmount "nested")
+(mount storyboard-widget "storyboard")
 
-(utils/insert-stylesheet styles/index)
+#_(unmount "fluid")
+
+(utils/insert-style styles/index)

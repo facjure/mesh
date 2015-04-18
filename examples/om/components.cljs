@@ -100,3 +100,19 @@ numquam sunt, cupiditate ad vitae facilis amet officiis debitis dignissimos!
 Iure atque, optio fuga voluptates officia alias excepturi vero consectetur 
 numquam sunt, cupiditate ad vitae facilis amet officiis debitis dignissimos!
  Id, quisquam? Lorem"]]])
+
+(defn image [id]
+  [:img {:src (str "/img/" id)}] )
+
+(defn storyboard [contents]
+  [:div
+   [:div {:class "grid"}
+    [:div {:class "unit whole center photo"}
+     :p contents]]
+   [:div {:class "grid"}
+    [:div {:class "unit half photo"} (image "python.png")]
+    [:div {:class "unit half photo"} (image "ruby.png")]]
+   [:div {:class "grid"}
+    [:div {:class "unit one-third photo"} (image "python.png")]
+    [:div {:class "unit one-third photo"} (image "clj.png")]
+    [:div {:class "unit one-third photo"} (image "cljs.png")]]])

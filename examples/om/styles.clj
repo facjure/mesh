@@ -2,26 +2,29 @@
   (:refer-clojure :exclude [+ - * /])
   (:require [garden.def :refer [defstyles defrule defkeyframes]]
             [garden.core :refer [css]]
-            [garden.units :as u :refer [px pt vw]]
+            [garden.units :as u :refer [px pt em]]
             [garden.color :as color :refer [hsl rgb]]
             [garden.arithmetic :refer [+ - * /]]
             [mesh.mixins :as mixins]
             [mesh.respond :as respond :refer [breakpoints]]
-            [mesh.typography :as typo :refer [typeset]]
+            [mesh.typography :as typo :refer [typeset vr-block scale-type make-serifs]]
             [mesh.grid :as grid]))
+
+
+;; Basic
 
 (def gutter (px 15))
 
 (defstyles typesetting
   (list
-   #_(typeset (:garamond typo/font-families)
+   (typeset (:garamond typo/font-families)
               (:optima typo/font-families)
               (:sourcecode-pro typo/font-families))
-   (typo/typeset-html typo/defaults :golden)))
+   #_(typo/typeset-html typo/defaults :golden)))
 
 (defstyles grids
   (list mixins/alignments
-        (typo/baseline-overlay (:cadetblue color/color-name->hex) 0)
+        #_(typo/baseline-overlay (:cadetblue color/color-name->hex) 0)
         (grid/initialize ".grid" gutter)
         (grid/create ".grid")
         (grid/wrap-widths 978)
@@ -32,5 +35,54 @@
         (grid/respond-small (:mobile breakpoints) gutter)
         (grid/respond-medium (:tablet breakpoints))))
 
+
 (def index
   (merge grids typesetting))
+
+
+;; Images FIXME
+
+#_(def images
+  [:.img-left {:float "left"
+               :margin-right (vr-block 2 (px 0))
+               :border-radius (em 999)}
+   [:&.vr-block {:height (vr-block 5.25 (px 0))
+                 :margin-bottom (vr-block 0.25 (px 0))}]])
+
+
+;; Ring-like API
+
+(def settings
+  {:min-width (px 400)
+   :max-width (px 1200)
+   :min-font (px 12)
+   :max-font (px 32)
+   :body-font (:garamond typo/font-families)
+   :body-font-weight 400
+   :header-font (:garamond typo/font-families)
+   :header-font-weight 600
+   :header-color "#111"
+   :scale 1.5})
+
+(def fonts {:font-size-base (em 1.5)
+            :line-height-base (em 1.45)
+            :ff-serif ["EB Garamond" "Serif"]
+            :ff-sans ["Fira Sans" "sans-serif"]
+            :ff-mono ["Source Code Pro" "monospace"]})
+
+(defn headings [declarations]
+  [:h1 :h2 :h3 :header declarations])
+
+(defn sub-headings [declarations]
+  [:h4 :h5 :h6 declarations])
+
+(defn body-copy [declarations]
+  [:section :article :p])
+
+(def typography
+  (-> headings
+      (scale-type settings)
+      (make-serifs typo/font-families)))
+
+#_(def index
+  (typography fonts))

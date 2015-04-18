@@ -5,6 +5,7 @@
              [garden.units :as units :refer (px pt em rem vw)]
              [garden.arithmetic :refer [+ - * /]]
              [garden.stylesheet :refer [at-media]]
+             [mesh.respond :as respond]
              #+clj
              [mesh.utils :as utils :refer [pow]]
              #+cljs
@@ -42,7 +43,7 @@
    :double-octave 4})
 
 (def defaults
-  {:line-height-ratio 1.45
+  {:line-height-ratio 1.5
    :header-ratio (:golden scales)
    :min-width (px 400)
    :max-width (px 1200)
@@ -92,11 +93,18 @@
            :color (:body-color conf)
            :line-height (em (:line-height-ratio conf))
            :font-size (:min-font conf)}]
-   (at-media {:min-width (:min-width conf)}
+   (at-media {:min-width (:tablet respond/breakpoints)}
              [:html {:font-size (calc (:min-font conf)
                                       (:max-font conf)
                                       (:min-width conf)
-                                      (:max-width conf))}])])
+                                      (:max-width conf))}])
+   (at-media {:min-width (:laptop respond/breakpoints)}
+             [:html {:font-size (calc (:min-font conf)
+                                      (:max-font conf)
+                                      (:min-width conf)
+                                      (:max-width conf))}])
+   (at-media {:min-width (:max-width conf)}
+             [:html {:font-size (:max-font conf)}])])
 
 #+clj
 (defn typeset-html [conf scale]
@@ -108,15 +116,19 @@
    (at-media {:min-width (:min-width conf)}
              [:html {:font-size (* (scale scales) (:min-font conf))}])])
 
-
 (def reset
   {:margin 0
    :padding 0})
 
-(defn vertical-unit[]
+(defn block []
+  {:margin-bottom (:line-height-ratio defaults)})
 
-  )
-
+(defn vr-block [units offset]
+  (let [a (* (:line-height-ratio defaults) (:max-font defaults))
+        b (/ (:max-font defaults) 2)
+        c (/ units 2)
+        d (+ 1 (/ offset (:max-font defaults)))]
+    (em (* c d (/ a b)))))
 
 (defn typeset [serif sans mono]
   [[:body :p (font sans 1 300 0.1 1.5)]
@@ -127,3 +139,21 @@
    [:h5 :h6 (font mono 1.2 300 0.2 1.5)]
    [:header (font serif 4 700 0.3 1.5 "small-caps")]
    [:footer (font sans 1 100 0.3 1.5)]])
+
+;; Ring-Like API samples FIXME
+
+(defn make-serifs [selector families]
+  (fn [declarations]
+    (let [styles (selector declarations)]
+      (conj styles (font (:garamond families) 3 600 0.5 2)))))
+
+(defn scale-type [selector params]
+  (fn [declarations]
+    (let [styles (selector declarations)]
+      (conj styles
+            (at-media {:min-width (:min-width (px 480))}
+                      [:& {:font-size (* 1.5 (:min-font params))}])
+            (at-media {:min-width (:min-width (px 960))}
+                      [:& {:font-size (* 2 (:min-font params))}])
+            (at-media {:min-width (:min-width (px 1440))}
+                      [:& {:font-size (* 2.5 (:min-font params))}])))))

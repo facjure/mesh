@@ -6,7 +6,7 @@
   (.pow Math base e))
 
 #+cljs
-(defn insert-stylesheet [styles]
+(defn insert-style [styles]
   "Inserts Stylesheet into document head"
   (let [el (.createElement js/document "style")
         node (.createTextNode js/document styles)]
