@@ -138,6 +138,6 @@
 
 #_(mount nested-widget "nested")
 
-#_(unmount "fluid")
+#_(unmount "nested")
 
-#_(mesh-dom/insert-styles styles/index)
+(mesh-dom/insert-styles styles/index)

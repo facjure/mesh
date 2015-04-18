@@ -17,7 +17,7 @@
 
 (defonce app-state
   (atom {:styles {}
-         :content {:storyboard "Beautiful languages"}}))
+         :content {:storyboard "Crazy languages"}}))
 
 (defn- empty-comp [data owner]
   (om/component
@@ -32,12 +32,16 @@
   [:section
    [:div {:class "grid"}
     [:div {:class "unit whole center photo"}
+     [:div.photo (image "ringo.png") ]
      [:p content]]]
    [:div {:class "grid"}
-    [:div {:class "unit three-fifths photo"} (image "python.png")]]
+    [:div {:class "unit one-third"}]
+    [:div {:class "unit one-third photo"} (image "clj.png")]
+    [:div {:class "unit one-third photo"}
+     [:div "hello"]]]
    [:div {:class "grid"}
     [:div {:class "unit one-third photo"} (image "python.png")]
-    [:div {:class "unit one-third photo"} (image "clj.png")]
+    [:div {:class "unit one-third photo"} (image "ruby.png")]
     [:div {:class "unit one-third photo"} (image "cljs.png")]]])
 
 (defn component [data owner]
@@ -96,8 +100,7 @@
 
 (def grid-styles
   (list mixins/alignments
-        (grid/initialize ".grid" (px 30))
-        (grid/create ".grid")
+        (grid/create ".grid" (px 30))
         (grid/wrap-widths 1200)
         (mixins/clearfix ".grid")
         (mixins/fit-images ".unit")
@@ -113,7 +116,7 @@
   (om/component
     (html [:div ""])))
 
-(mount component "storyboard")
+#_(mount component "storyboard")
 
 #_(unmount "storyboard")
 

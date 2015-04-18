@@ -10,7 +10,6 @@
             [mesh.typography :as typo :refer [typeset vr-block scale-type make-serifs]]
             [mesh.grid :as grid]))
 
-
 ;; Basic
 
 (def gutter (px 15))
@@ -25,8 +24,7 @@
 (defstyles grids
   (list mixins/alignments
         #_(typo/baseline-overlay (:cadetblue color/color-name->hex) 0)
-        (grid/initialize ".grid" gutter)
-        (grid/create ".grid")
+        (grid/create ".grid" gutter)
         (grid/wrap-widths 978)
         (mixins/clearfix ".grid")
         (mixins/fit-images ".unit")
@@ -35,20 +33,8 @@
         (grid/respond-small (:mobile breakpoints) gutter)
         (grid/respond-medium (:tablet breakpoints))))
 
-
 (def index
   (merge grids typesetting))
-
-
-;; Images FIXME
-
-#_(def images
-  [:.img-left {:float "left"
-               :margin-right (vr-block 2 (px 0))
-               :border-radius (em 999)}
-   [:&.vr-block {:height (vr-block 5.25 (px 0))
-                 :margin-bottom (vr-block 0.25 (px 0))}]])
-
 
 ;; Ring-like API
 

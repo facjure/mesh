@@ -21,8 +21,7 @@
 (def grids
   (list mixins/alignments
         #_(typo/baseline-overlay (:aquamarine color/color-name->hex) 2)
-        (grid/initialize ".grid" gutter)
-        (grid/create ".grid")
+        (grid/create ".grid" gutter)
         (grid/wrap-widths 978)
         (mixins/clearfix ".grid")
         (mixins/fit-images ".unit")
