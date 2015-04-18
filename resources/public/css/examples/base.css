@@ -54,7 +54,7 @@ p, pre {
 
 code, pre {
   font-family: "Source Code Pro", Consolas, Menlo, Monaco, monospace;
-  background: #F1E3D3;
+  background: #48D1CC;
   color: #333;
   padding: 3px;
   border-radius: 5px;
@@ -77,7 +77,7 @@ pre {
 }
 
 .demo .unit pre:hover {
-  background: #fc0;
+  background: #8FBC8F;
 }
 
 .grid, .unit {
@@ -87,7 +87,7 @@ pre {
 
 .demo .unit .grid {
   overflow: hidden;
-  background: rgba(241, 227, 213, .5);
+  background: rgb(0,139,139, 0.5);
 }
 
 .demo .unit .grid:first-child {

@@ -1,7 +1,9 @@
 (ns dev.repl
   (:require-macros
    [figwheel.client.utils :refer [enable-dev-blocks!]])
-  (:require [examples.om.page :as main]
+  (:require [examples.isomorphic.page :as iso]
+            [examples.hello.page :as hello]
+            [examples.storyboard.page :as story]
             [figwheel.client :as fw]))
 
 (enable-console-print!)

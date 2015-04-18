@@ -1,17 +1,19 @@
-(ns examples.om.styles
+(ns examples.isomorphic.styles
   (:require [garden.core :refer [css]]
             [garden.units :as u :refer [px pt em]]
             [garden.color :as color :refer [hsl rgb]]
             [mesh.respond :as respond :refer [breakpoints]]
             [mesh.mixins :as mixins]
-            [mesh.typography :as typo :refer [typeset]]
+            [mesh.typography :as typo]
             [mesh.grid :as grid]))
+
+;; Generic Grids
 
 (def gutter (px 20))
 
 (def typesetting
   (list
-   #_(typeset (:garamond typo/font-families)
+   #_(typo/typeset (:garamond typo/font-families)
               (:optima typo/font-families)
               (:sourcecode-pro typo/font-families))
    (typo/typeset-html typo/defaults :golden)))
@@ -31,15 +33,3 @@
 
 (def index
   (css (merge grids typesetting)))
-
-(def fluid
-  (css
-   (let [gutter (px 10)]
-     (list (grid/initialize ".grid" gutter)
-           (grid/create ".grid")
-           (grid/wrap-widths 640)
-           (mixins/clearfix ".grid")
-           (mixins/fit-images ".unit")
-           (grid/create-nested-units)
-           (grid/nuke-gutters-and-padding)
-           (grid/respond-medium (:tablet breakpoints))))))

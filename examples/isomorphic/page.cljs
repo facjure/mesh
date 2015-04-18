@@ -1,9 +1,21 @@
-(ns examples.om.components
+(ns examples.isomorphic.page
   (:require [om.core :as om :include-macros true]
             [om.dom :as dom :include-macros true]
             [sablono.core :as html :refer-macros [html]]
             [mesh.utils :as utils]
-            [examples.om.styles :as styles]))
+            [mesh.dom :as mesh-dom]
+            [examples.isomorphic.styles :as styles]))
+
+(enable-console-print!)
+
+(defonce app-state
+  (atom {:fluid nil
+         :nested nil
+         :baseline nil}))
+
+(defn view [grid-component]
+  [:section {:class "demo"}
+   (grid-component)])
 
 (defn fluid-grids []
   [:div
@@ -80,39 +92,52 @@
          [:pre "***"]]]]
       [:div {:class "unit one-fifth"} "***"]]]]])
 
-(defn baseline-grid []
-  [:div
-   [:div {:class "grid"}
-    [:div {:class "unit one-half align-right"}
-     [:h2 "Baseline Grids"]
-     [:p
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-Iure atque, optio fuga voluptates officia alias excepturi vero consectetur 
-numquam sunt, cupiditate ad vitae facilis amet officiis debitis dignissimos!
- Id, quisquam? Lorem"]]
-    [:p
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-Iure atque, optio fuga voluptates officia alias excepturi vero consectetur 
-numquam sunt, cupiditate ad vitae facilis amet officiis debitis dignissimos!
- Id, quisquam? Lorem"]
-    [:p
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-Iure atque, optio fuga voluptates officia alias excepturi vero consectetur 
-numquam sunt, cupiditate ad vitae facilis amet officiis debitis dignissimos!
- Id, quisquam? Lorem"]]])
+(defn fluid-widget [data owner]
+  (reify
+    om/IWillMount
+    (will-mount [_]
+      (println "Fluid widget mounting"))
+    om/IRenderState
+    (render-state [_ {:keys [count]}]
+      (println "Render!")
+      (html (view fluid-grids)))))
 
-(defn image [id]
-  [:img {:src (str "/img/" id)}] )
+(defn nested-widget [data owner]
+  (reify
+    om/IWillMount
+    (will-mount [_]
+      (println "Nested widget mounting"))
+    om/IRenderState
+    (render-state [_ {:keys [count]}]
+      (println "Render!")
+      (html (view nested-grids)))))
 
-(defn storyboard [contents]
-  [:div
-   [:div {:class "grid"}
-    [:div {:class "unit whole center photo"}
-     :p contents]]
-   [:div {:class "grid"}
-    [:div {:class "unit half photo"} (image "python.png")]
-    [:div {:class "unit half photo"} (image "ruby.png")]]
-   [:div {:class "grid"}
-    [:div {:class "unit one-third photo"} (image "python.png")]
-    [:div {:class "unit one-third photo"} (image "clj.png")]
-    [:div {:class "unit one-third photo"} (image "cljs.png")]]])
+(defn empty-widget [data owner]
+  (reify
+    om/IRenderState
+    (render-state [_ {:keys [count]}]
+      (println "Unmounting!")
+      (html [:div ""]))))
+
+(defn mount
+  ([widget id]
+   (mount widget id nil))
+  ([widget id style]
+   (om/root
+    widget
+    app-state
+    {:target (.getElementById js/document id)})))
+
+(defn unmount [id]
+  (om/root
+   empty-widget
+   app-state
+   {:target (.getElementById js/document id)}))
+
+#_(mount fluid-widget "fluid")
+
+#_(mount nested-widget "nested")
+
+#_(unmount "fluid")
+
+#_(mesh-dom/insert-styles styles/index)
