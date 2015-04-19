@@ -5,9 +5,7 @@ A Responsive Grid & Typography toolkit for Clojure & Clojurescript. Built on [Ga
 
 ## Quickstart
 
-A sample workflow to write Stylesheets in Clojure or Clojurescript:
-
-A dead simple grid:
+A simple 8-column grid with `col-x` classes:
 
 ```clojure
 (grid/create-minimal-grid ".grid" (px 20))
@@ -43,12 +41,15 @@ Designer: Make the headings `serifs` and `scale-types` using four `breakpoints`
    :max-width (px 1200)
    :min-font (px 12)
    :max-font (px 32)
-   :body-font (:garamond typo/font-families)
-   :body-font-weight 400
-   :header-font (:garamond typo/font-families)
+   :body-font (:eb-garamond typo/font-families)
+   :header-font (:eb-garamond typo/font-families)
    :header-font-weight 600
    :header-color "#111"
-   :scale 1.5})
+   :scale :golden-ratio
+   :breakpoints {:mobile (px 480)
+                 :tablet (px 960)
+                 :laptop (px 1440)
+                 :monitor (px 1920)}})
 
 (def fonts {:font-size-base (em 1.5)
             :line-height-base (em 1.45)
@@ -65,8 +66,7 @@ Designer: Make the headings `serifs` and `scale-types` using four `breakpoints`
     (make-serifs typo/font-families)))
 ```
 
-To make this spec work a true functional programmer will say, sure, let me
-build two higher order functions for you.
+Functional programmer: "Sure, let me build two higher order functions."
 
 ```clojure
 ;; a bad example
@@ -88,13 +88,6 @@ build two higher order functions for you.
                       [:& {:font-size (* 2.25 (:min-font params))}])))))
 
 ```
-
-We can't chain mixins that pass the same context around a single declaration in
-Sass.
-
-But we can do that with Garden.
-
-Welcome to Clojurescript.
 
 ## Workflow
 
@@ -126,18 +119,14 @@ Invoke styles via plain old **Javascript**:
 mesh.utils.insert_styles(app.styles.index)
 ```
 
-As you can see you don't need complex build tools like Webpack in Clojurescript. Convert CSS into
-data, and pass them around as code. Did I say they have namespaces?
+You don't need complex build tools like [Webpack](http://webpack.github.io) in
+Clojurescript. Just Convert CSS into data and pass them around as code.
 
 ## Examples
 
-The `examples` folder consists of working examples, primarily in Om.
-
-To run examples:
+Examples are run with the current mesh src with figwheel. To run:
 
 	lein dev
-
-Examples are run with the current mesh src with figwheel.
 
 ## Templates
 
@@ -150,9 +139,10 @@ Mesh is currently in the design phase.
 
 ## Credits
 
-A big thanks to Joel Holbrooks for creating Garden, and David Nolen for everything else :).
+A big thanks to Joel Holbrooks for creating Garden, and David Nolen for
+everything else :).
 
-Ideas for implementing CSS Grids are inspired and being ported from
+Ideas for implementing CSS Grids and Typography are inspired and being ported from
 [Gridism](http://cobyism.com/gridism/),
 [Lost](https://github.com/corysimmons/lost),
 [Golden Grid System](http://goldengridsystem.com),
@@ -177,10 +167,9 @@ explore various grid libraries in CSS3, Sass, Less, and Stylus.
 
 ## Status
 
-0.2.x
+0.2.x. Unstable. Incomplete, etc.,
 
-Unstable. Incomplete. I'm still in the process of porting several sass grid+typo
-libraries to gain a better understanding of a flexible api for Clojurescript.
+I'm in the process of porting sass libraries before settling on the core apis for Clojurescript.
 
 ## License
 
