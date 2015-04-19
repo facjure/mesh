@@ -152,8 +152,8 @@
     (let [styles (selector declarations)]
       (conj styles
             (at-media {:min-width (:min-width (px 480))}
-                      [:& {:font-size (* 1.5 (:min-font params))}])
+                      [:& {:font-size (* 1.25 (:min-font params))}])
+            (at-media {:min-width (:min-width (px 720))}
+                      [:& {:font-size (* 1.75 (:min-font params))}])
             (at-media {:min-width (:min-width (px 960))}
-                      [:& {:font-size (* 2 (:min-font params))}])
-            (at-media {:min-width (:min-width (px 1440))}
-                      [:& {:font-size (* 2.5 (:min-font params))}])))))
+                      [:& {:font-size (* 2.25 (:min-font params))}])))))

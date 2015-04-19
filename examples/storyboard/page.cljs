@@ -18,7 +18,16 @@
 
 (defonce app-state
   (atom {:styles {}
-         :content {:storyboard "Crazy languages"}}))
+         :content {:header "On the Rocks"
+                   :subheading "Clojure/West, Portland"
+                   :quotes {:hickey "a system made out of genuinely simple
+                            parts, is going to be able to affect the
+                            greatest change with the least work."
+                            :nolen "ClojureScript: Lisp's Revenge"
+                            :rossum "If the language is any good, your users are
+                            going to take it to places where you never thought
+                            it would be taken."
+                            :ruby "It’s a lot harder to pull your head up and ask why."}}}))
 
 (defn- empty-comp [data owner]
   (om/component
@@ -32,8 +41,10 @@
 (defn view [content]
   [:section
    [:div {:class "grid"}
-    [:div {:class "unit whole center photo"}
-     [:div.photo (image "ringo.png") ]
+    [:div {:class "unit whole align-left"}
+     [:p content]]
+    [:div {:class "unit whole photo"}
+     [:div.photo (image "clj-com.png") ]
      [:p content]]]
    [:div {:class "grid"}
     [:div {:class "unit one-third"}]
@@ -55,7 +66,7 @@
       (println "Render!")
       (html
        [:section {:class "demo"}
-        (view (get-in data [:content :storyboard]))]))))
+        (view (get-in data [:content :header]))]))))
 
 (defn mount
   ([widget id]
@@ -110,7 +121,11 @@
         (grid/respond-medium (:tablet breakpoints))))
 
 (def styles
-  (css (merge grid-styles (typography fonts))))
+  (css
+   (merge
+    (images/photos)
+    grid-styles
+    (typography fonts))))
 
 (defn empty-comp [data owner]
   (om/component
