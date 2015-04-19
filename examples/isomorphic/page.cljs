@@ -54,6 +54,7 @@
     [:div {:class "unit golden-small"}
      [:pre ".golden-small"]]]])
 
+;; TODO Refactor
 (defn nested-grids []
   [:div
    [:div {:class "grid"}
@@ -134,10 +135,10 @@
    app-state
    {:target (.getElementById js/document id)}))
 
-#_(mount fluid-widget "fluid")
+(mount fluid-widget "fluid")
 
 #_(mount nested-widget "nested")
 
 #_(unmount "nested")
 
-(mesh-dom/insert-styles styles/index)
+#_(mesh-dom/insert-styles styles/index)

@@ -131,8 +131,8 @@
   (om/component
     (html [:div ""])))
 
-(mount component "storyboard")
+#_(mount component "storyboard")
 
 #_(unmount "storyboard")
 
-(mesh-dom/insert-styles styles)
+#_(mesh-dom/insert-styles styles)

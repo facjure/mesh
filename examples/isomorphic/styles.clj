@@ -18,8 +18,8 @@
 (defstyles typesetting
   (list
    (typeset (:garamond typo/font-families)
-              (:optima typo/font-families)
-              (:sourcecode-pro typo/font-families))
+            (:optima typo/font-families)
+            (:sourcecode-pro typo/font-families))
    #_(typo/typeset-html typo/defaults :golden)))
 
 (defstyles grids
@@ -33,10 +33,10 @@
         (grid/respond-small (:mobile breakpoints) gutter)
         (grid/respond-medium (:tablet breakpoints))))
 
-(def index
-  (merge grids typesetting))
+#_(def index
+    (merge grids typesetting))
 
-;; Ring-like API
+;; Testing DSL
 
 (def settings
   {:min-width (px 400)
@@ -48,7 +48,11 @@
    :header-font (:garamond typo/font-families)
    :header-font-weight 600
    :header-color "#111"
-   :scale 1.5})
+   :scale 1.5
+   :breakpoints {:mobile (px 480)
+                 :tablet (px 960)
+                 :laptop (px 1440)
+                 :monitor (px 1920)}})
 
 (def fonts {:font-size-base (em 1.5)
             :line-height-base (em 1.45)
@@ -70,5 +74,6 @@
       (scale-type settings)
       (make-serifs typo/font-families)))
 
-#_(def index
-  (typography fonts))
+(def index
+  (merge grids
+         (typography fonts)))

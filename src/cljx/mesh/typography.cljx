@@ -151,9 +151,9 @@
   (fn [declarations]
     (let [styles (selector declarations)]
       (conj styles
-            (at-media {:min-width (:min-width (px 480))}
-                      [:& {:font-size (* 1.25 (:min-font params))}])
-            (at-media {:min-width (:min-width (px 720))}
+            (at-media {:min-width (get-in params [:breakpoints :mobile])}
+                      [:& {:font-size (* 1.5 (:min-font params))}])
+            (at-media {:min-width (get-in params [:breakpoints :tablet])}
                       [:& {:font-size (* 1.75 (:min-font params))}])
-            (at-media {:min-width (:min-width (px 960))}
+            (at-media {:min-width (get-in params [:breakpoints :laptop])}
                       [:& {:font-size (* 2.25 (:min-font params))}])))))
