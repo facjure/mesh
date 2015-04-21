@@ -4,7 +4,7 @@
             [sablono.core :as html :refer-macros [html]]
             [mesh.utils :as utils]
             [mesh.dom :as mesh-dom]
-            [examples.isomorphic.styles :as styles]))
+            #_[examples.isomorphic.styles :as styles]))
 
 (enable-console-print!)
 
@@ -64,14 +64,14 @@
     [:div {:class "unit three-quarters"}
      [:div {:class "grid"}
       [:div {:class "unit whole"}
-       [:p {:class "align-center"} "Gridception!"]]]
+       [:p {:class "align-center"} "Nesting!"]]]
      [:div {:class "grid"}
       [:div {:class "unit one-third"}
        [:pre "***"]]
       [:div {:class "unit two-thirds"}
        [:div {:class "grid"}
         [:div {:class "unit whole"}
-         [:p {:class "align-center"} "Gridception!"]]]
+         [:p {:class "align-center"} "Nesting!"]]]
        [:div {:class "grid"}
         [:div {:class "unit two-fifths"}
          [:pre "***"]]
@@ -135,7 +135,7 @@
    app-state
    {:target (.getElementById js/document id)}))
 
-(mount fluid-widget "fluid")
+#_(mount fluid-widget "fluid")
 
 #_(mount nested-widget "nested")
 

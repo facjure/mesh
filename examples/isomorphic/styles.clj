@@ -15,26 +15,29 @@
 
 (def gutter (px 15))
 
+(def alegreya ["Alegreya" "Baskerville" "Georgia" "Times" "serif"])
+(def sans ["\"Open Sans\"" "Avenir" "Helvetica" "sans-serif"])
+(def mono ["Inconsolata" "Menlo" "Courier" "monospace"])
+
 (defstyles typesetting
   (list
-   (typeset (:garamond typo/font-families)
-            (:optima typo/font-families)
-            (:sourcecode-pro typo/font-families))
-   #_(typo/typeset-html typo/defaults :golden)))
+   #_(typeset serif
+              (:optima typo/font-families)
+              (:sourcecode-pro typo/font-families))
+   (typo/typeset-html typo/defaults :golden)))
 
 (defstyles grids
   (list utils/alignments
         #_(typo/baseline-overlay (:cadetblue color/color-name->hex) 0)
         (grid/create ".grid" gutter)
         (grid/wrap-widths 978)
-        (images/fit-images ".unit")
         (grid/create-nested-units)
         (grid/nuke-gutters-and-padding)
         (grid/respond-small (:mobile breakpoints) gutter)
         (grid/respond-medium (:tablet breakpoints))))
 
-#_(def index
-    (merge grids typesetting))
+(def index
+  (merge grids typesetting))
 
 ;; Testing DSL
 
@@ -43,15 +46,14 @@
    :max-width (px 1200)
    :min-font (px 12)
    :max-font (px 32)
-   :body-font (:garamond typo/font-families)
+   :body-font alegreya
    :body-font-weight 400
    :header-font (:garamond typo/font-families)
    :header-font-weight 600
    :header-color "#111"
-   :scale 1.5
    :breakpoints {:mobile (px 480)
-                 :tablet (px 960)
-                 :laptop (px 1440)
+                 :tablet (px 720)
+                 :laptop (px 960)
                  :monitor (px 1920)}})
 
 (def fonts {:font-size-base (em 1.5)

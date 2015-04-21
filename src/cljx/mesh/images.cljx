@@ -15,7 +15,8 @@
 (defn photos []
   [[:div.photo {:margin [[(px 30) 0]]}
     [:img {:display "block"
-           :max-width "100%"}]
+           :max-width "100%"
+           :margin "auto"}]
     [:p {:width "auto"
          :margin [[(px 10) "18.041237113402%" 0 0]]
          :font-size (em 0.8)

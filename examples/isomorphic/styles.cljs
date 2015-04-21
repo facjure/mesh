@@ -12,16 +12,29 @@
 
 (def gutter (px 20))
 
+(def defaults
+  {:line-height-ratio 1.5
+   :header-ratio (:golden scales)
+   :min-width (px 480)
+   :max-width (px 960)
+   :min-font (px 12)
+   :max-font (px 28)
+   :body-color "#666"
+   :body-font (:garamond font-families)
+   :body-font-weight 400
+   :header-font (:garamond font-families)
+   :header-font-weight 600
+   :header-color "#111"
+   :breakpoints {:mobile (px 480)
+                 :tablet (px 720)
+                 :laptop (px 960)}})
+
 (def typesetting
   (list
-   #_(typo/typeset (:garamond typo/font-families)
-              (:optima typo/font-families)
-              (:sourcecode-pro typo/font-families))
-   (typo/typeset-html typo/defaults :golden)))
+   (typo/typeset-html defaults :golden)))
 
 (def grids
   (list utils/alignments
-        #_(typo/baseline-overlay (:aquamarine color/color-name->hex) 2)
         (grid/create ".grid" gutter)
         (grid/wrap-widths 978)
         (images/fit-images ".unit")

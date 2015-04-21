@@ -9,6 +9,6 @@
 
 (def breakpoints
   {:mobile (px 480)
-   :tablet (px 960)
-   :laptop (px 1440)
+   :tablet (px 720)
+   :laptop (px 960)
    :monitor (px 1920)})

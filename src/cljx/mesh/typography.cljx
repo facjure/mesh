@@ -2,7 +2,7 @@
   (:refer-clojure :exclude [+ - * / rem])
   (:require  [garden.compiler :refer [render-css]]
              [garden.core :refer [css]]
-             [garden.units :as units :refer (px pt em rem vw)]
+             [garden.units :as units :refer (px pt pc em rem vw)]
              [garden.arithmetic :refer [+ - * /]]
              [garden.stylesheet :refer [at-media]]
              [mesh.respond :as respond]
@@ -45,11 +45,11 @@
 (def defaults
   {:line-height-ratio 1.5
    :header-ratio (:golden scales)
-   :min-width (px 400)
-   :max-width (px 1200)
+   :min-width (px 480)
+   :max-width (px 960)
    :vertical-rythm true
    :min-font (px 12)
-   :max-font (px 32)
+   :max-font (px 28)
    :body-color "#666"
    :body-font (:garamond font-families)
    :body-font-weight 400
@@ -63,6 +63,7 @@
    :font-weight weight
    :letter-spacing (rem kerning)
    :line-height (em leading)
+   :text-align "left"
    :text-transform (get options :text-transform "none")})
 
 (defn baseline-overlay [color offset]
@@ -82,8 +83,6 @@
         vp-diff (- (px (viewport-w)) min-width)
         wid-diff (- max-width min-width)
         res (* font-diff (/ vp-diff wid-diff))]
-    (println "Calculated Fontsize: " (:magnitude res))
-    (swap! state assoc :font-size res)
     res))
 
 #+cljs
@@ -132,20 +131,20 @@
 
 (defn typeset [serif sans mono]
   [[:body :p (font sans 1 300 0.1 1.5)]
-   [:h1 (font serif 3 600 0.5 2)]
-   [:h2 (font serif 3 400 0.5 2)]
-   [:h3 (font serif 2 300 0.5 2)]
-   [:h4 (font serif 1.5 300 0.3 2)]
-   [:h5 :h6 (font mono 1.2 300 0.2 1.5)]
-   [:header (font serif 4 700 0.3 1.5 "small-caps")]
-   [:footer (font sans 1 100 0.3 1.5)]])
+   [:h1 (font serif 3 600 0.5 1.5)]
+   [:h2 (font serif 3 400 0.5 1.5)]
+   [:h3 (font serif 2 300 0.5 1.3)]
+   [:h4 (font serif 1.5 300 0.3 1.3)]
+   [:h5 :h6 (font mono 1.2 300 0.2 1.2)]
+   [:header (font serif 4 700 0.3 1.2 "small-caps")]
+   [:footer (font sans 1 100 0.3 1.2)]])
 
-;; Ring-Like API samples FIXME
+;; FIXME: Move to API
 
 (defn make-serifs [selector families]
   (fn [declarations]
     (let [styles (selector declarations)]
-      (conj styles (font (:garamond families) 3 600 0.5 2)))))
+      (conj styles (font (:ff-sans families) 2 400 0.5 1.45)))))
 
 (defn scale-type [selector params]
   (fn [declarations]
@@ -154,6 +153,12 @@
             (at-media {:min-width (get-in params [:breakpoints :mobile])}
                       [:& {:font-size (* 1.5 (:min-font params))}])
             (at-media {:min-width (get-in params [:breakpoints :tablet])}
-                      [:& {:font-size (* 1.75 (:min-font params))}])
+                      [:& {:font-size (* 2 (:min-font params))}])
             (at-media {:min-width (get-in params [:breakpoints :laptop])}
-                      [:& {:font-size (* 2.25 (:min-font params))}])))))
+                      [:& {:font-size (* 2.5 (:min-font params))}])))))
+
+
+(defn leading [selector lead]
+  (fn [declarations]
+    (let [styles (selector declarations)]
+      (conj styles {:line-height (em lead)}))))
