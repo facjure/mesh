@@ -21,14 +21,14 @@
          {:title "Thinking Clojurescript"
           :issue "Issue No #1"
           :publisher "The Facjure Review"
-          :logo "/img/logo.png"
+          :logo ""
           :editorial "Object Oriented programming as a paradigm has many real
                    benefits but one of the worst plagues it has inflicted on
                    programming culture is obscuring data. Functional programming
                    is not a silver bullet but its emphasis on unadorned data is
                    a guiding light. No models."
           :interviews ["David Nolen, " "Bruce Hoffman, " "Joel Holdbrooks"]
-          :developer-pic "/img/cljs.png"
+          :developer-pic ""
           :essays ["“A meditation in Edn” by Priyatam Mudivarti"]
           :quotes {:nolen-tweet "“We create things with our tools, and
                     our tools have consequences”"
@@ -84,7 +84,7 @@
 
 (add-watch app-state :history
            (fn [_ _ old new]
-             (println old new history)
+             #_(println old new history)
              (when-not (= (last @history) new)
                (swap! history conj new))))
 
@@ -129,11 +129,12 @@
      [:h5 "Essays"]
      [:p (map str essays)]]]
    [:div {:class "grid"}
-    [:div {:class "unit half" }
-     [:blockquote.oval-quotes
+    [:div {:class "unit one-third" }
+     [:blockquote.oval-quotes' ;; oval-thought-border
       [:p (get-in content [:quotes :dev-quote])]]]
-    [:div {:class "unit one-third photo"} ]]
+    [:div {:class "unit two-thirds"} ]]
    [:div {:class "grid"}
+    #_[:div {:class "unit golden-small"}]
     [:div {:class "unit golden-large photo-medium"} [:img {:src developer-pic}]
      [:p (get-in content [:quotes :dev-quote])]]]])
 
@@ -142,6 +143,7 @@
     om/IWillMount
     (will-mount [_]
       (println "widget mounting")
+      ;; Insert fine-grain component styles
       (insert-styles styles/page-styles))
     om/IRenderState
     (render-state [_ {:keys [count]}]
@@ -173,10 +175,16 @@
 
 (mount component "storyboard")
 
+
+;; Demos
+
 #_(unmount "storyboard")
 
-#_(swap! app-state assoc-in [:content :quotes :nolen-tweet] "Clojure West 2015")
+#_(swap! app-state assoc-in [:content :logo] "/img/logo.png")
+#_(swap! app-state assoc-in [:content :developer-pic] "/img/cljs.png")
+
+#_(swap! app-state assoc-in [:content :quotes :nolen-tweet]
+         "Clojurescript, Lisp's revenge")
 
 #_(reset! app-state new-state)
-
 #_(undo!)
