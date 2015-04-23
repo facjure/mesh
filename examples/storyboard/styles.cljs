@@ -37,9 +37,7 @@
         utils/alignments))
 
 (def page-styles
-  (css
-   (merge
-    (images/photos)
-    'grid-styles
-    'typography-base
-    )))
+  (css (merge
+        (images/photos)
+        grid-styles
+        typography-base)))

@@ -10,8 +10,6 @@
              [mesh.typography :as typo :refer [typeset]]
              [mesh.grid :as grid]))
 
-(enable-console-print!)
-
 (defonce app-state
   (atom {:msg "Hello Garden"}))
 

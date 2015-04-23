@@ -21,18 +21,18 @@
          {:title "Thinking Clojurescript"
           :issue "Issue No #1"
           :publisher "The Facjure Review"
-          :logo ""
+          :logo "http://placekitten.com/404/404"
           :editorial "Object Oriented programming as a paradigm has many real
                    benefits but one of the worst plagues it has inflicted on
                    programming culture is obscuring data. Functional programming
                    is not a silver bullet but its emphasis on unadorned data is
                    a guiding light. No models."
-          :interviews ["David Nolen, " "Bruce Hoffman, " "Joel Holdbrooks"]
-          :developer-pic ""
+          :interviews ["David Nolen, " "Bruce Hauman, " "Joel Holdbrooks"]
+          :developer-pic "http://placekitten.com/404/404"
           :essays ["“A meditation in Edn” by Priyatam Mudivarti"]
           :quotes {:nolen-tweet "“We create things with our tools, and
                     our tools have consequences”"
-                   :dev-quote "The Functional Final Frontier in Clojurescript"}}
+                   :dev-quote "The Functional final frontier: Clojurescript"}}
          :interviewer "nolen.png"
          :styles {:font-size-base (em 1.5)
                   :line-height-base (em 1.45)
@@ -124,26 +124,25 @@
     [:div {:class "unit half"}
      [:p (:editorial content)]]
     [:div {:class "unit half"}
-     [:h5 "Interviews"]
+     [:h4 "Interviews"]
      [:p (map str interviews)]
      [:h5 "Essays"]
      [:p (map str essays)]]]
    [:div {:class "grid"}
-    [:div {:class "unit one-third" }
-     [:blockquote.oval-quotes' ;; oval-thought-border
-      [:p (get-in content [:quotes :dev-quote])]]]
-    [:div {:class "unit two-thirds"} ]]
+    [:div {:class "unit golden-small"} ]
+    [:div {:class "unit golden-large" }
+     [:blockquote.oval-quotes ;; oval-thought-border
+      [:p (get-in content [:quotes :dev-quote])]]]]
    [:div {:class "grid"}
-    #_[:div {:class "unit golden-small"}]
-    [:div {:class "unit golden-large photo-medium"} [:img {:src developer-pic}]
-     [:p (get-in content [:quotes :dev-quote])]]]])
+    [:div {:class "unit golden-small photo-medium"} [:img {:src developer-pic}]
+     ]
+     [:div {:class "unit golden-large"}]]])
 
 (defn component [data owner]
   (reify
     om/IWillMount
     (will-mount [_]
       (println "widget mounting")
-      ;; Insert fine-grain component styles
       (insert-styles styles/page-styles))
     om/IRenderState
     (render-state [_ {:keys [count]}]
@@ -151,10 +150,9 @@
       (html
        [:section {:class "demo"}
         (view (:content data))
-        (undo-button)]))
+        #_(undo-button)]))
     om/IWillUnmount
     (will-unmount [_]
-      (println "widget unmounting")
       ;; remove styles
       )))
 
@@ -175,16 +173,13 @@
 
 (mount component "storyboard")
 
-
 ;; Demos
 
 #_(unmount "storyboard")
 
-#_(swap! app-state assoc-in [:content :logo] "/img/logo.png")
-#_(swap! app-state assoc-in [:content :developer-pic] "/img/cljs.png")
-
-#_(swap! app-state assoc-in [:content :quotes :nolen-tweet]
-         "Clojurescript, Lisp's revenge")
-
+(swap! app-state assoc-in [:content :logo] "/img/logo.png")
+(swap! app-state assoc-in [:content :developer-pic] "/img/cljs.png")
+(swap! app-state assoc-in [:content :quotes :nolen-tweet]
+         "Lisp's revenge")
 #_(reset! app-state new-state)
 #_(undo!)
