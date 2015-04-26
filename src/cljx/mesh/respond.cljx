@@ -1,5 +1,7 @@
 (ns mesh.respond
   (:refer-clojure :exclude [+ - * /])
+  #+cljs
+  (:require-macros [mesh.def :refer [defbreakpoint]])
   (:require [garden.core :refer [css]]
             [garden.units :as u :refer [px pt]]
             [garden.units :refer (px+ px* px- px-div em)]
