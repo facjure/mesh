@@ -5,13 +5,13 @@ A Responsive Grid & Typography toolkit for Clojure & Clojurescript. Built on [Ga
 
 ## Quickstart
 
-A simple 8-column grid with `col-x` classes:
+**A simple 8-column grid** with `col-x` classes:
 
 ```clojure
 (grid/create-minimal-grid ".grid" (px 20))
 ```
 
-Fractional and nested grids:
+**Fluid, Fractional grids**
 
 ```clojure
 (def gutter (px 20))
@@ -25,7 +25,23 @@ Fractional and nested grids:
          (grid/respond-medium (:tablet breakpoints))))
 ```
 
-**Create new DSLs**:
+**Nested Grids**
+
+Add the following to fluid grids:
+
+```clojure
+(grid/create-nested-units)
+```
+
+**Golden Grids**
+
+Coming soon
+
+**DIY Grids**
+
+Coming soon
+
+**Create new DSLs**
 
 You may be working with a Creative Director or a Print Designer who does not
 understand CSS. But they understand Design. Wouldn't it be nice to understand
@@ -89,7 +105,13 @@ Functional programmer: "Sure, let me build two higher order functions."
 
 ```
 
-## Workflow
+## Examples
+
+Run `examples` with the current mesh src with figwheel:
+
+	lein dev
+
+## Clojure or Clojurescript?
 
 Styles can be compiled on the server, client, or generated as plain css files.
 
@@ -116,26 +138,16 @@ styles into a single file, just import individual styles as _functions_:
 Invoke styles via plain old **Javascript**:
 
 ```javascript
-mesh.utils.insert_styles(app.styles.index)
+mesh.dom.insert_styles(app.styles.index)
 ```
 
 You don't need complex build tools like [Webpack](http://webpack.github.io) in
 Clojurescript. Just Convert CSS into data and pass them around as code.
 
-## Examples
-
-Examples are run with the current mesh src with figwheel. To run:
-
-	lein dev
-
 ## Templates
 
-- [mala](https://github.com/priyatam/mala) is an isomorphic clojure/cljs
-  template to build SPA with Ring, Om, and Garden (and soon Mesh).
-
-## Contributing
-
-Mesh is currently in the design phase. 
+[Mala](https://github.com/priyatam/mala) is an isomorphic clj/cljs template to
+build SPA with Ring, Om, and Garden (Mesh)
 
 ## Credits
 
@@ -152,18 +164,22 @@ library would have been much harder without the work of these designers.
 
 ## References
 
-Josef Müller-Brockmann's [Grid Systems](http://www.amazon.com/Grid-Systems-Graphic-Design-Communication/dp/3721201450)
-is a quintessential introduction to the theory of Grids & Typography.
-
-[Thinking grids](https://github.com/priyatam/thinking-grids) is my reference to
-explore various grid libraries in CSS3, Sass, Less, and Stylus.
-
+- [Grid Systems in Graphic Design](http://www.amazon.com/Grid-Systems-Graphic-Design-Communication/dp/3721201450)
+by Josef Müller-Brockmann is a classic
+- [Clojure/West Interview](http://www.lispcast.com/pre-west-priyatam-mudivarti)
+- [Clojure/West Presentation](https://www.youtube.com/watch?v=-jnJGNDoSXc)
+- [Thinking grids](https://github.com/priyatam/thinking-grids) is my reference to
+explore grid libraries in Sass, Less, and Stylus.
+- [Don’t overthink it](https://css-tricks.com/dont-overthink-it-grids/) by Chris Coyler
 - [Baseline Grids](http://alistapart.com/article/settingtypeontheweb)
-- [Don’t overthink it](https://css-tricks.com/dont-overthink-it-grids/)
 - [Fluid Grids](http://alistapart.com/article/fluidgrids)
 - [OOCS](http://oocss.org/grids_docs.html)
-- [The magic behind Bootstrap Grids](http://www.helloerik.com/the-subtle-magic-behind-why-the-bootstrap-3-grid-works)
+- [The magic of Bootstrap Grids](http://www.helloerik.com/the-subtle-magic-behind-why-the-bootstrap-3-grid-works)
 - [Understanding Susy's Grids](http://www.zell-weekeat.com/susy2-tutorial)
+
+## Contributing
+
+Mesh is currently in the design phase. 
 
 ## Status
 
