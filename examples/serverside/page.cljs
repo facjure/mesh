@@ -1,22 +1,17 @@
-(ns examples.isomorphic.page
+(ns examples.serverside.page
   (:require [om.core :as om :include-macros true]
             [om.dom :as dom :include-macros true]
             [sablono.core :as html :refer-macros [html]]
             [mesh.utils :as utils]
-            [mesh.dom :as mesh-dom]
-            #_[examples.isomorphic.styles :as styles]))
+            [mesh.dom :as mesh-dom]))
 
 (enable-console-print!)
-
-(defonce app-state
-  (atom {:fluid nil
-         :nested nil
-         :baseline nil}))
 
 (defn view [grid-component]
   [:section {:class "demo"}
    (grid-component)])
 
+;; TODO Refactor
 (defn fluid-grids []
   [:div
    [:h2 "Fluid/Fractional Grids"]
@@ -135,10 +130,7 @@
    app-state
    {:target (.getElementById js/document id)}))
 
-#_(mount fluid-widget "fluid")
-
-#_(mount nested-widget "nested")
+(mount fluid-widget "fluid")
+(mount nested-widget "nested")
 
 #_(unmount "nested")
-
-#_(mesh-dom/insert-styles styles/index)

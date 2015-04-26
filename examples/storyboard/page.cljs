@@ -14,7 +14,7 @@
             [mesh.typography :as typo :refer [typeset]]
             [examples.storyboard.styles :as styles]))
 
-#_(enable-console-print!)
+(enable-console-print!)
 
 (defonce app-state
   (atom {:content
@@ -93,8 +93,6 @@
     (swap! history pop)
     (reset! app-state (last @history))))
 
-;; Components
-
 (defn- empty-comp [data owner]
   (om/component
     (html [:div ""])))
@@ -134,8 +132,7 @@
      [:blockquote.oval-quotes ;; oval-thought-border
       [:p (get-in content [:quotes :dev-quote])]]]]
    [:div {:class "grid"}
-    [:div {:class "unit golden-small photo-medium"} [:img {:src developer-pic}]
-     ]
+    [:div {:class "unit golden-small photo-medium"} [:img {:src developer-pic}]]
      [:div {:class "unit golden-large"}]]])
 
 (defn component [data owner]
@@ -143,14 +140,14 @@
     om/IWillMount
     (will-mount [_]
       (println "widget mounting")
-      (insert-styles styles/page-styles))
+      (insert-styles styles/index))
     om/IRenderState
     (render-state [_ {:keys [count]}]
       (println "Render!")
       (html
        [:section {:class "demo"}
         (view (:content data))
-        #_(undo-button)]))
+        (undo-button)]))
     om/IWillUnmount
     (will-unmount [_]
       ;; remove styles
@@ -171,15 +168,12 @@
    app-state
    {:target (.getElementById js/document id)}))
 
-(mount component "storyboard")
+#_(mount component "storyboard")
+#_(unmount "storyboard")
 
 ;; Demos
 
-#_(unmount "storyboard")
-
-(swap! app-state assoc-in [:content :logo] "/img/logo.png")
-(swap! app-state assoc-in [:content :developer-pic] "/img/cljs.png")
-(swap! app-state assoc-in [:content :quotes :nolen-tweet]
-         "Lisp's revenge")
+#_(swap! app-state assoc-in [:content :logo] "/img/logo.png")
+#_(swap! app-state assoc-in [:content :developer-pic] "/img/cljs.png")
+#_(swap! app-state assoc-in [:content :quotes :nolen-tweet] "Lisp's revenge")
 #_(reset! app-state new-state)
-#_(undo!)

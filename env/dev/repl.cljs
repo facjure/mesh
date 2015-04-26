@@ -1,7 +1,7 @@
 (ns dev.repl
   (:require-macros
    [figwheel.client.utils :refer [enable-dev-blocks!]])
-  (:require [examples.isomorphic.page :as iso]
+  (:require [examples.serverside.page :as serverside]
             [examples.hello.page :as hello]
             [examples.storyboard.page :as story]
             [figwheel.client :as fw]))

@@ -1,4 +1,4 @@
-(ns isomorphic.styles
+(ns serverside.styles
   (:refer-clojure :exclude [+ - * /])
   (:require [garden.def :refer [defstyles defrule defkeyframes]]
             [garden.core :refer [css]]
@@ -11,9 +11,7 @@
             [mesh.typography :as typo :refer [typeset vr-block scale-type make-serifs]]
             [mesh.grid :as grid]))
 
-;; Basic
-
-(def gutter (px 15))
+(def gutter (px 20))
 
 (def alegreya ["Alegreya" "Baskerville" "Georgia" "Times" "serif"])
 (def sans ["\"Open Sans\"" "Avenir" "Helvetica" "sans-serif"])
@@ -38,44 +36,3 @@
 
 (def index
   (merge grids typesetting))
-
-;; Testing DSL
-
-(def settings
-  {:min-width (px 400)
-   :max-width (px 1200)
-   :min-font (px 12)
-   :max-font (px 32)
-   :body-font alegreya
-   :body-font-weight 400
-   :header-font (:garamond typo/font-families)
-   :header-font-weight 600
-   :header-color "#111"
-   :breakpoints {:mobile (px 480)
-                 :tablet (px 720)
-                 :laptop (px 960)
-                 :monitor (px 1920)}})
-
-(def fonts {:font-size-base (em 1.5)
-            :line-height-base (em 1.45)
-            :ff-serif ["EB Garamond" "Serif"]
-            :ff-sans ["Fira Sans" "sans-serif"]
-            :ff-mono ["Source Code Pro" "monospace"]})
-
-(defn headings [declarations]
-  [:h1 :h2 :h3 :header declarations])
-
-(defn sub-headings [declarations]
-  [:h4 :h5 :h6 declarations])
-
-(defn body-copy [declarations]
-  [:section :article :p])
-
-(def typography
-  (-> headings
-      (scale-type settings)
-      (make-serifs typo/font-families)))
-
-(def index
-  (merge grids
-         (typography fonts)))
