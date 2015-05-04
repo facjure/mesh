@@ -1,4 +1,4 @@
-(ns examples.serverside.page
+(ns examples.grids.page
   (:require [om.core :as om :include-macros true]
             [om.dom :as dom :include-macros true]
             [sablono.core :as html :refer-macros [html]]
@@ -78,8 +78,9 @@
         [:div {:class "unit whole"}
          [:p {:class "align-center"} "Gridception!"]]]
        [:div {:class "grid"}
-        [:div {:class "unit one-quarter"}
+d        [:div {:class "unit one-quarter"}
          [:pre "***"]]
+
         [:div {:class "unit one-quarter"}
          [:pre "***"]]
         [:div {:class "unit one-quarter"}

@@ -1,4 +1,4 @@
-(ns serverside.styles
+(ns grids.styles
   (:refer-clojure :exclude [+ - * /])
   (:require [garden.def :refer [defstyles defrule defkeyframes]]
             [garden.core :refer [css]]
