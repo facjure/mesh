@@ -14,7 +14,7 @@
 ;; TODO Refactor
 (defn fluid-grids []
   [:div
-   [:h2 "Fluid/Fractional Grids"]
+   [:h2 {:class "grid-title"} "Fluid/Fractional Grids"]
    [:div {:class "grid"}
     [:div {:class "unit whole"}
      [:pre ".whole"]]]

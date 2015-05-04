@@ -34,5 +34,10 @@
         (grid/respond-small (:mobile breakpoints) gutter)
         (grid/respond-medium (:tablet breakpoints))))
 
+(def bp
+  (let [grid-title (defrule grid-title :.grid-title)]
+    (respond/iphone-5
+     (grid-title {:font-size 10}))))
+
 (def index
-  (merge grids typesetting))
+  (merge grids typesetting bp))
