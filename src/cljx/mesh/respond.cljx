@@ -46,22 +46,22 @@
   {:screen true
    :min-width (px 1824)})
 
-;; IPhones
+;; IPhones (3, 4, 4s, 5, 5s, 6)
 
-(def iphone-4-media-params
+(def iphone-3-4-media-params
   {:screen true
    :min-device-width (px 320)
    :max-device-width (px 480)
    :-webkit-min-device-pixel-ratio 2})
 
-(defbreakpoint iphone-4
-  iphone-4-media-params)
+(defbreakpoint iphone-3-4
+  iphone-3-4-media-params)
 
-(defbreakpoint iphone-4-landscape
-  (assoc iphone-4-media-params :orientation :landscape))
+(defbreakpoint iphone-3-4-landscape
+  (assoc iphone-3-4-media-params :orientation :landscape))
 
-(defbreakpoint iphone-4-portrait
-  (assoc iphone-4-media-params :orientation :portrait))
+(defbreakpoint iphone-3-4-portrait
+  (assoc iphone-3-4-media-params :orientation :portrait))
 
 (def iphone-5-media-params
   {:screen true
@@ -93,3 +93,38 @@
 (defbreakpoint iphone-6-portrait
   (assoc iphone-6-media-params :orientation :portrait))
 
+;; IPads
+
+(def ipad-1-2-media-params
+  {:screen true
+   :min-device-width (px 768)
+   :max-device-width (px 1024)
+   :-webkit-min-device-pixel-ratio 1})
+
+(defbreakpoint ipad-1-2
+  ipad-1-2-media-params)
+
+(defbreakpoint ipad-1-2-landscape
+  (assoc ipad-1-2-media-params :orientation :landscape))
+
+(defbreakpoint ipad-1-2-portrait
+  (assoc ipad-1-2-media-params :orientation :portrait))
+
+(def ipad-mini ipad-1-2)
+(def ipad-mini-landscape ipad-1-2-landscape)
+(def ipad-mini-portrait ipad-1-2-portrait)
+
+(def ipad-3-4-media-params
+  {:screen true
+   :min-device-width (px 768)
+   :max-device-width (px 1024)
+   :-webkit-min-device-pixel-ratio 2})
+
+(defbreakpoint ipad-3-4
+  ipad-3-4-media-params)
+
+(defbreakpoint ipad-3-4-landscape
+  (assoc ipad-3-4-media-params :orientation :landscape))
+
+(defbreakpoint ipad-3-4-portrait
+  (assoc ipad-3-4-media-params :orientation :portrait))
