@@ -5,8 +5,7 @@
   #+clj
   (:require [mesh.def :refer [defbreakpoint]])
   (:require [garden.core :refer [css]]
-            [garden.units :as u :refer [px pt]]
-            [garden.units :refer (px+ px* px- px-div em)]
+            [garden.units :as u :refer (px pt em rem dpi)]
             [garden.color :as color :refer [hsl rgb]]
             [garden.arithmetic :refer [+ - * /]]
             [garden.stylesheet :refer [at-media]]))
@@ -128,3 +127,18 @@
 
 (defbreakpoint ipad-3-4-portrait
   (assoc ipad-3-4-media-params :orientation :portrait))
+
+;; Laptops
+
+(defbreakpoint non-retina-laptops
+  {:screen true
+   :min-device-width (px 1200)
+   :max-device-width (px 1600)
+   :-webkit-min-device-pixel-ratio 1})
+
+(defbreakpoint retina-laptops
+  {:screen true
+   :min-device-width (px 1200)
+   :max-device-width (px 1600)
+   :-webkit-min-device-pixel-ratio 2
+   :min-resolution (dpi 192)})
