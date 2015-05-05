@@ -78,7 +78,7 @@
         [:div {:class "unit whole"}
          [:p {:class "align-center"} "Gridception!"]]]
        [:div {:class "grid"}
-d        [:div {:class "unit one-quarter"}
+        [:div {:class "unit one-quarter"}
          [:pre "***"]]
 
         [:div {:class "unit one-quarter"}

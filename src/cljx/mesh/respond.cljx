@@ -5,7 +5,7 @@
   #+clj
   (:require [mesh.def :refer [defbreakpoint]])
   (:require [garden.core :refer [css]]
-            [garden.units :as u :refer (px pt em rem dpi)]
+            [garden.units :as units :refer (px pt em rem dpi)]
             [garden.color :as color :refer [hsl rgb]]
             [garden.arithmetic :refer [+ - * /]]
             [garden.stylesheet :refer [at-media]]))
@@ -92,6 +92,59 @@
 (defbreakpoint iphone-6-portrait
   (assoc iphone-6-media-params :orientation :portrait))
 
+;; Galaxy Phones
+
+(def galaxy-s3-media-params
+  {:screen true
+   :min-device-width (px 320)
+   :max-device-width (px 640)
+   :-webkit-min-device-pixel-ratio 2})
+
+(defbreakpoint galaxy-s3
+  galaxy-s3-media-params)
+
+(defbreakpoint galaxy-s3-landscape
+  (assoc galaxy-s3-media-params :orientation :landscape))
+
+(defbreakpoint galaxy-s3-portrait
+  (assoc galaxy-s3-media-params :orientation :portrait))
+
+(def galaxy-s4-media-params
+  {:screen true
+   :min-device-width (px 320)
+   :max-device-width (px 640)
+   :-webkit-min-device-pixel-ratio 3})
+
+(defbreakpoint galaxy-s4
+  galaxy-s4-media-params)
+
+(defbreakpoint galaxy-s4-landscape
+  (assoc galaxy-s4-media-params :orientation :landscape))
+
+(defbreakpoint galaxy-s4-portrait
+  (assoc galaxy-s4-media-params :orientation :portrait))
+
+(def galaxy-s5-media-params
+  {:screen true
+   :min-device-width (px 360)
+   :max-device-width (px 640)
+   :-webkit-min-device-pixel-ratio 3})
+
+(defbreakpoint galaxy-s5
+  galaxy-s5-media-params)
+
+(defbreakpoint galaxy-s5-landscape
+  (assoc galaxy-s5-media-params :orientation :landscape))
+
+(defbreakpoint galaxy-s5-portrait
+  (assoc galaxy-s5-media-params :orientation :portrait))
+
+;; HTC One
+
+(def htc-one galaxy-s5)
+(def htc-one-landscape galaxy-s5-landscape)
+(def htc-one-portrait galaxy-s5-portrait)
+
 ;; IPads
 
 (def ipad-1-2-media-params
@@ -127,6 +180,73 @@
 
 (defbreakpoint ipad-3-4-portrait
   (assoc ipad-3-4-media-params :orientation :portrait))
+
+;; Galaxy Tablets
+
+(def galaxy-tab-media-params
+  {:min-device-width (px 800)
+   :max-device-width (px 1280)})
+
+(defbreakpoint galaxy-tab
+  galaxy-tab-media-params)
+
+(defbreakpoint galaxy-tab-landscape
+  (assoc galaxy-tab-media-params :orientation :landscape))
+
+(defbreakpoint galaxy-tab-portrait
+  (assoc galaxy-tab-media-params :orientation :portrait))
+
+;; Nexus Tablets
+
+(def nexus-tab-media-params
+  {:screen true
+   :min-device-width (px 601)
+   :max-device-width (px 906)
+   :-webkit-min-device-pixel-ratio 1.331
+   :-webkit-max-device-pixel-ratio 1.332})
+
+(defbreakpoint nexus-tab
+  nexus-tab-media-params)
+
+(defbreakpoint nexus-tab-landscape
+  (assoc nexus-tab-media-params :orientation :landscape))
+
+(defbreakpoint nexus-tab-portrait
+  (assoc nexus-tab-media-params :orientation :portrait))
+
+;; Kindle Fire Crap
+
+(def kindle-fire-media-params
+  {:screen true
+   :min-device-width (px 800)
+   :max-device-width (px 1280)
+   :-webkit-min-device-pixel-ratio 1.5})
+
+(defbreakpoint kindle-fire
+  kindle-fire-media-params)
+
+(defbreakpoint kindle-fire-landscape
+  (assoc kindle-fire-media-params :orientation :landscape))
+
+(defbreakpoint kindle-fire-portrait
+  (assoc kindle-fire-media-params :orientation :portrait))
+
+;; Kindle Fire HD Crap
+
+(def kindle-fire-hd-media-params
+  {:screen true
+   :min-device-width (px 1200)
+   :max-device-width (px 1600)
+   :-webkit-min-device-pixel-ratio 1.5})
+
+(defbreakpoint kindle-fire-hd
+  kindle-fire-hd-media-params)
+
+(defbreakpoint kindle-fire-hd-landscape
+  (assoc kindle-fire-hd-media-params :orientation :landscape))
+
+(defbreakpoint kindle-fire-hd-portrait
+  (assoc kindle-fire-hd-media-params :orientation :portrait))
 
 ;; Laptops
 
