@@ -1,5 +1,6 @@
+resources/public/img
 resources/public/js
-resources/public/css/mesh.css
+resources/public/css/**/*.css
 .lein-*
 .repl*
 .nrepl*
