@@ -51,34 +51,6 @@
          :data {:foo "Foo"
                 :bar "Bar"}}))
 
-(def new-state
-  {:content
-   {:title "Thinking Ruby"
-    :issue "Issue No #87 2008"
-    :publisher "The Ruby Review"
-    :logo "http://placekitten.com/404/404"
-    :editorial "Dynamic programming Redux"
-    :interviews ["DHH " "Jason, " "Joe"]
-    :developer-pic "/img/ruby.png"
-    :quotes {:dev-quote "It’s a lot harder to pull your head up and ask why."
-             :nolen-best "The Functional Final Frontier in Clojurescript"}}
-   :styles {:font-size-base (em 1.5)
-            :line-height-base (em 1.45)
-            :min-width (px 400)
-            :max-width (px 1200)
-            :min-font (px 12)
-            :max-font (px 24)
-            :body-font ["Alegreya" "Baskerville" "Georgia" "Times" "serif"]
-            :body-font-weight 400
-            :header-font (:firasans typo/font-families)
-            :header-font-weight 600
-            :breakpoints {:mobile (px 480)
-                          :tablet (px 720)
-                          :desktop (px 960)}
-            :scale 1}
-   :data {:foo "Foo"
-          :bar "Bar"}})
-
 (def history
   (atom [@app-state]))
 
@@ -170,10 +142,3 @@
 
 #_(mount component "storyboard")
 #_(unmount "storyboard")
-
-;; Demos
-
-#_(swap! app-state assoc-in [:content :logo] "/img/logo.png")
-#_(swap! app-state assoc-in [:content :developer-pic] "/img/cljs.png")
-#_(swap! app-state assoc-in [:content :quotes :nolen-tweet] "Lisp's revenge")
-#_(reset! app-state new-state)
