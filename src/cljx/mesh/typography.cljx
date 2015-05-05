@@ -5,17 +5,13 @@
              [garden.units :as units :refer (px pt pc em rem vw)]
              [garden.arithmetic :refer [+ - * /]]
              [garden.stylesheet :refer [at-media]]
+             #+cljs
+             [cljs-numbers.core :refer [ratio? double? zero? pos? neg?]]
              [mesh.respond :as respond]
              #+clj
-             [mesh.utils :as utils :refer [pow]]
+             [mesh.utils :as utils :refer [pow whole-number?]]
              #+cljs
              [mesh.utils :as utils :refer [pow viewport-w]]))
-
-#+cljs
-(enable-console-print!)
-
-(def state
-  (atom {:font-size nil}))
 
 (def font-families
   {:garamond ["\"EB Garamond\"" "Baskerville" "Georgia" "Times" "serif"]
@@ -138,3 +134,33 @@
    [:h5 :h6 (font mono 1.2 300 0.2 1.2)]
    [:header (font serif 4 700 0.3 1.2 "small-caps")]
    [:footer (font sans 1 100 0.3 1.2)]])
+
+#+clj
+(defn modular-scale-fn [base ratio]
+  (let [[up down] (if (ratio? ratio)
+                    (if (< (denominator ratio)
+                           (numerator ratio))
+                      [* /]
+                      [/ *])
+                    (if (< 1 ratio)
+                      [* /]
+                      [/ *]))
+        f (float ratio)
+        us (iterate #(up % f) base)
+        ds (iterate #(down % f) base)]
+    (memoize
+     (fn ms [n]
+       (cond
+         (< 0 n) (if (whole-number? n)
+                   (nth us n)
+                   (let [m (Math/floor (float n))
+                         [a b] [(ms m) (ms (inc m))]]
+                     (+ a (* (Math/abs (- a b))
+                             (- n m)))))
+         (< n 0) (if (whole-number? n)
+                   (nth ds (Math/abs n))
+                   (let [m (Math/floor (float n))
+                         [a b] [(ms m) (ms (dec m))]]
+                     (+ a (* (Math/abs (- a b))
+                             (- n m)))))
+         :else base)))))

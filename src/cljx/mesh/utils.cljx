@@ -36,3 +36,6 @@
    [:.align-right {:text-align "right"}]
    [:.pull-left {:float "left"}]
    [:.pull-right {:float "right"}]])
+
+(defn whole-number? [n]
+  (= n (Math/floor n)))
