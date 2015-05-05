@@ -8,7 +8,8 @@
             [mesh.utils :as utils]
             [mesh.images :as images]
             [mesh.respond :as respond :refer [breakpoints]]
-            [mesh.typography :as typo :refer [typeset vr-block scale-type make-serifs]]
+            [mesh.typography :as typo :refer [typeset vr-block]]
+            [mesh.typesetting :as typesetting :refer [scale-type make-serifs]]
             [mesh.grid :as grid]))
 
 (def gutter (px 20))
@@ -17,7 +18,7 @@
 (def sans ["\"Open Sans\"" "Avenir" "Helvetica" "sans-serif"])
 (def mono ["Inconsolata" "Menlo" "Courier" "monospace"])
 
-(defstyles typesetting
+(defstyles printer
   (list
    #_(typeset serif
               (:optima typo/font-families)
@@ -40,4 +41,4 @@
      (grid-title {:font-size 10}))))
 
 (def index
-  (merge grids typesetting bp))
+  (merge grids printer bp))

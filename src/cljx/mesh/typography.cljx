@@ -138,27 +138,3 @@
    [:h5 :h6 (font mono 1.2 300 0.2 1.2)]
    [:header (font serif 4 700 0.3 1.2 "small-caps")]
    [:footer (font sans 1 100 0.3 1.2)]])
-
-;; FIXME: Move to API
-
-(defn make-serifs [selector families]
-  (fn [declarations]
-    (let [styles (selector declarations)]
-      (conj styles (font (:ff-sans families) 2 400 0.5 1.45)))))
-
-(defn scale-type [selector params]
-  (fn [declarations]
-    (let [styles (selector declarations)]
-      (conj styles
-            (at-media {:min-width (get-in params [:breakpoints :mobile])}
-                      [:& {:font-size (* 1.5 (:min-font params))}])
-            (at-media {:min-width (get-in params [:breakpoints :tablet])}
-                      [:& {:font-size (* 2 (:min-font params))}])
-            (at-media {:min-width (get-in params [:breakpoints :laptop])}
-                      [:& {:font-size (* 2.5 (:min-font params))}])))))
-
-
-(defn leading [selector lead]
-  (fn [declarations]
-    (let [styles (selector declarations)]
-      (conj styles {:line-height (em lead)}))))

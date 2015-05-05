@@ -7,7 +7,8 @@
              [mesh.images :as images]
              [mesh.respond :as respond :refer [breakpoints]]
              [mesh.grid :as grid]
-             [mesh.typography :as typo :refer [typeset scale-type make-serifs]]))
+             [mesh.typography :as typo :refer [typeset]]
+             [mesh.typesetting :as typesetting :refer [scale-type make-serifs]]))
 
 (def serif ["Alegreya" "Baskerville" "Georgia" "Times" "serif"])
 (def sans ["\"Open Sans\"" "Avenir" "Helvetica" "sans-serif"])
