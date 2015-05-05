@@ -18,10 +18,9 @@
    :laptop (px 1024)
    :desktop (px 1440)})
 
-(defbreakpoint mobile-sm
+(defbreakpoint mobile
   {:screen true
-   :min-width (px 320)
-   :max-width (px 480)})
+   :min-width (px 320)})
 
 (defbreakpoint mobile-lg
   {:screen true
@@ -37,7 +36,7 @@
    :min-width (px 1024)
    :max-width (px 1439)})
 
-(defbreakpoint desktop-sm
+(defbreakpoint desktop
   {:screen true
    :min-width (px 1440)})
 
