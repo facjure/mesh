@@ -6,6 +6,7 @@
             [garden.color :as color :refer [hsl rgb]]
             [garden.arithmetic :refer [+ - * /]]
             [garden.stylesheet :refer [at-media]]
+            [mesh.respond :as respond]
             [mesh.utils :refer [border-box clearfix reset-padding]]))
 
 (defn initialize [clazz gutter]
@@ -19,7 +20,9 @@
      [:&:first-child {:padding-left gutter}]
      [:&:last-child {:padding-right gutter}]]]])
 
-;; https://css-tricks.com/dont-overthink-it-grids/
+;; A simple Grid, based on on 1,2,4,8 columns
+;; https://css-tricks.com/dont-overthink-it-grids
+
 (defn create-minimal-grid [clazz pad]
   [[:* {:box-sizing "border-box"}]
    [clazz {:background "white"
@@ -37,6 +40,8 @@
     [:.col-1-8 {:width "12.50%"}]
     [:.out-padding {:padding [[pad 0 pad pad pad]]}
      ["[class*='col-']:last-of-type" {:padding-right pad}]]]])
+
+;; Fluid/Fractional Grids, with nesting
 
 (defn create-nested-units []
   [:.unit
@@ -113,3 +118,42 @@
             [:.wider
              [:.grid {:max-width width
                       :margin "0 auto"}]]))
+
+;; Bootstrap style Container=>Row=>Column based Grids with 15px margins, and offsets
+
+(def container
+  (list
+   [:& clearfix]
+   (respond/phone)
+   (respond/phablet)
+   (respond/tablet)
+   (respond/desktop)
+   (respond/hd)))
+
+(defn offset [n]
+  (let [m (min (max 0 n) 12)]
+    [:&
+     {:margin-left (% (* 100 (/ n 12.0)))}]))
+
+(defn col [n]
+  (let [m (min (max 0 n) 12)]
+    [:&
+     {:float :left
+      :position :relative
+      :min-height (px 1)
+      :padding-left (px 15)
+      :padding-right (px 15)
+      :width (% (* 100 (/ m 12.0)))}]))
+
+(def row
+  [:&
+   {:margin-right (px -15)
+    :margin-left (px -15)}
+   clearfix])
+
+(defn block [& {:as opts}]
+  [:&
+   (when-let [c (:col opts)]
+     (col c))
+   (when-let [o (:offset opts)]
+     (offset o))])
