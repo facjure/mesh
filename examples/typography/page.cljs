@@ -31,4 +31,4 @@
    app-state
    {:target (.getElementById js/document id)}))
 
-(mount component "typography")
+#_(mount component "typography")
