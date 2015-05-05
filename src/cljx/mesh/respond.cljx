@@ -22,7 +22,7 @@
   {:screen true
    :min-width (px 320)})
 
-(defbreakpoint mobile-lg
+(defbreakpoint phablet
   {:screen true
    :min-width (px 481)})
 
@@ -40,7 +40,7 @@
   {:screen true
    :min-width (px 1440)})
 
-(defbreakpoint desktop-lg
+(defbreakpoint hd
   {:screen true
    :min-width (px 1824)})
 
