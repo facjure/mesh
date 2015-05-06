@@ -1,5 +1,5 @@
 (ns mesh.respond
-  (:refer-clojure :exclude [+ - * /])
+  (:refer-clojure :exclude [+ - * / rem])
   #+cljs
   (:require-macros [mesh.def :refer [defbreakpoint]])
   #+clj
