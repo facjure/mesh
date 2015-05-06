@@ -15,6 +15,5 @@
    (list
     (grid/create-minimal-grid ".grid" (px 20)))))
 
-(react/mount (dom/h1 "Hello World") app)
-
-(mesh-dom/insert-styles styles)
+#_(react/mount (dom/h1 "Hello World") app)
+#_(mesh-dom/insert-styles styles)
