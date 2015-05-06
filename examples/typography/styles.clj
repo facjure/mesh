@@ -11,6 +11,8 @@
             [mesh.grid :as grid]))
 
 (def alegreya ["Alegreya" "Baskerville" "Georgia" "Times" "serif"])
+(def sans ["\"Open Sans\"" "Avenir" "Helvetica" "sans-serif"])
+(def mono ["Inconsolata" "Menlo" "Courier" "monospace"])
 
 (def ms
   (let [f (typo/modular-scale-fn 16 3/4)]

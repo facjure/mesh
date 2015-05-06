@@ -1,7 +1,7 @@
 (ns mesh.grid
   (:refer-clojure :exclude [+ - * /])
   (:require [garden.core :refer [css]]
-            [garden.units :as u :refer [px pt]]
+            [garden.units :as u :refer [px pt pc]]
             [garden.units :refer (px+ px* px- px-div em)]
             [garden.color :as color :refer [hsl rgb]]
             [garden.arithmetic :refer [+ - * /]]
@@ -119,12 +119,12 @@
              [:.grid {:max-width width
                       :margin "0 auto"}]]))
 
-;; Bootstrap style Container=>Row=>Column based Grids with 15px margins, and offsets
+;; Bootstrap-style Container=>Row=>Column Grids with 15px margins, and % offsets
 
 (def container
   (list
    [:& clearfix]
-   (respond/phone)
+   (respond/mobile)
    (respond/phablet)
    (respond/tablet)
    (respond/desktop)
@@ -133,7 +133,7 @@
 (defn offset [n]
   (let [m (min (max 0 n) 12)]
     [:&
-     {:margin-left (% (* 100 (/ n 12.0)))}]))
+     {:margin-left (pc (* 100 (/ n 12.0)))}]))
 
 (defn col [n]
   (let [m (min (max 0 n) 12)]
@@ -143,7 +143,7 @@
       :min-height (px 1)
       :padding-left (px 15)
       :padding-right (px 15)
-      :width (% (* 100 (/ m 12.0)))}]))
+      :width (pc (* 100 (/ m 12.0)))}]))
 
 (def row
   [:&
