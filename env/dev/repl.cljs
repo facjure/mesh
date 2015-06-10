@@ -4,7 +4,6 @@
   (:require [examples.hello.page :as hello]
             [examples.typography.page :as typo]
             [examples.grids.page :as grids]
-            [examples.storyboard.page :as story]
             [figwheel.client :as fw]))
 
 (enable-console-print!)
