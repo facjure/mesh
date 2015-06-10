@@ -9,6 +9,11 @@ body > header, body > section, body > footer {
   float: left;
 }
 
+header {
+  border: 2px solid #eee;
+  font-size: 2.6em;
+}
+
 header, section {
   border-bottom: 1px solid #eee;
 }
