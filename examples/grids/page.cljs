@@ -131,7 +131,7 @@
    app-state
    {:target (.getElementById js/document id)}))
 
-#_(mount fluid-widget "fluid")
-#_(mount nested-widget "nested")
+(mount fluid-widget "fluid")
+(mount nested-widget "nested")
 
 #_(unmount "fluid")

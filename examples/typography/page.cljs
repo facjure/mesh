@@ -15,6 +15,7 @@
     (render-state [_ {:keys [msg]}]
       (html
        [:section {:class "home"}
+        [:h2 "Typographic Scales"]
         [:h1 (:msg data)]
         [:h2 (:msg data)]
         [:h3 (:msg data)]
@@ -31,4 +32,4 @@
    app-state
    {:target (.getElementById js/document id)}))
 
-#_(mount component "typography")
+(mount component "typography")

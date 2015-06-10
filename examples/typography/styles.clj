@@ -14,11 +14,6 @@
 (def sans ["\"Open Sans\"" "Avenir" "Helvetica" "sans-serif"])
 (def mono ["Inconsolata" "Menlo" "Courier" "monospace"])
 
-(def ms
-  (let [f (typo/modular-scale-fn 16 3/4)]
-    (fn [n]
-      (px (f n)))))
-
 (defstyles fonts
   (typeset alegreya sans mono))
 
@@ -34,37 +29,46 @@
 (defrule medium :p.medium)
 (defrule large :p.large)
 
+(def ms
+  (let [f (typo/modular-scale-fn 16 1614/1000)]
+    (fn [n]
+      (px (f n)))))
+
 (defstyles typography
   (body
    {:font-family alegreya})
 
   (homepage
    (h1
-     (respond/desktop
-      {:padding  [[0 (ms 1)]]
+     (respond/tablet
+      {:padding  [[0 (ms 2)]]
        :font-size (ms 5)
-       :line-height (ms 5)}))
+       :line-height (ms 5)})
+     (respond/iphone-5
+      {:padding  [[0 (ms 2)]]
+       :font-size (ms 5)
+       :line-height (ms 2)}))
 
    (h2
-     (respond/desktop
+     (respond/tablet
       {:padding  [[0 (ms 1)]]
        :font-size (ms 4)
-       :line-height (ms 4.4)}))
+       :line-height (ms 4)}))
 
    (h3
-     (respond/desktop
+     (respond/tablet
       {:padding  [[0 (ms 1)]]
        :font-size (ms 3)
        :line-height (ms 3)}))
 
    (h4
-     (respond/desktop
+     (respond/tablet
       {:padding  [[0 (ms 1)]]
        :font-size (ms 2)
        :line-height (ms 2)}))
 
    (h5
-     (respond/desktop
+     (respond/tablet
       {:padding  [[0 (ms 1)]]
        :font-size (ms 1)
        :line-height (ms 1)}))
@@ -76,19 +80,19 @@
        :line-height (ms 0)}))
 
    (large
-     (respond/desktop
+     (respond/tablet
       {:padding  [[0 (ms 1)]]
        :font-size (ms -1)
        :line-height (ms -1)}))
 
    (medium
-     (respond/desktop
+     (respond/tablet
       {:padding  [[0 (ms 1)]]
        :font-size (ms -2)
        :line-height (ms -2)}))
 
    (small
-     (respond/desktop
+     (respond/tablet
       {:padding  [[0 (ms 1)]]
        :font-size (ms -3)
        :line-height (ms -3)}))))
