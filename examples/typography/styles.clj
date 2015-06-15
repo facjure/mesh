@@ -30,7 +30,7 @@
 (defrule large :p.large)
 
 (def ms
-  (let [f (typo/modular-scale-fn 16 1614/1000)]
+  (let [f (typo/modular-scale-fn 16 (:golden scales))]
     (fn [n]
       (px (f n)))))
 
@@ -47,7 +47,7 @@
      (respond/iphone-5
       {:padding  [[0 (ms 2)]]
        :font-size (ms 5)
-       :line-height (ms 2)}))
+       :line-height (ms 5)}))
 
    (h2
      (respond/tablet

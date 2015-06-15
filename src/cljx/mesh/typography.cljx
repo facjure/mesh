@@ -20,23 +20,23 @@
    :sourcecode-pro ["\"Source Code Pro\"" "monospace"]})
 
 (def scales
-  {:minor-second 1.067
-   :major-second 1.125
-   :minor-third  1.2
-   :major-third  1.25
-   :perfect-fourth 1.333
-   :aug-fourth 1.414
-   :perfect-fifth 1.5
-   :minor-sixth 1.6
-   :golden 1.618
-   :major-sixth 1.667
-   :minor-seventh 1.778
-   :major-seventh 1.875
-   :octave 2
-   :major-tenth 2.5
-   :major-eleventh 2.667
-   :major-twelfth 3
-   :double-octave 4})
+  {:minor-second (/ 16 15)
+   :major-second (/ 9 8)
+   :minor-third  (/ 6 5)
+   :major-third  (/ 5 4)
+   :perfect-fourth (/ 4 3)
+   :aug-fourth (/ 1.411 1)
+   :perfect-fifth (/ 3 2)
+   :minor-sixth (/ 8 5)
+   :golden (/ 1.61803 1)
+   :major-sixth (/ 5 3)
+   :minor-seventh (/ 16 9)
+   :major-seventh (/ 15 8)
+   :octave (/ 2 1)
+   :major-tenth (/ 5 2)
+   :major-eleventh (/ 8 3)
+   :major-twelfth (/ 3 1)
+   :double-octave (/ 4 1)})
 
 (def defaults
   {:line-height-ratio 1.5
