@@ -25,6 +25,10 @@
               (:sourcecode-pro typo/font-families))
    (typo/typeset-html typo/defaults :golden)))
 
+(defstyles resets
+  (list
+   utils/reset-common-selectors))
+
 (defstyles grids
   (list utils/alignments
         #_(typo/baseline-overlay (:cadetblue color/color-name->hex) 0)
@@ -41,4 +45,4 @@
      (grid-title {:font-size 10}))))
 
 (def index
-  (merge grids printer bp))
+  (merge grids printer bp resets))

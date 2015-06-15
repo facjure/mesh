@@ -37,5 +37,17 @@
    [:.pull-left {:float "left"}]
    [:.pull-right {:float "right"}]])
 
+(def reset-common-selectors
+  [:h1 :h2 :h3 :h4 :h5 :h6
+   :p :blockquote :pre
+   :dl :dt :dd :ol :ul :li
+   :fieldset :form :label :legend
+   :th :td
+   :artcle :section :aside :figure :footer :header
+   :hgroup :menu :nav :section
+   {:margin 0
+    :padding 0
+    :border 0}])
+
 (defn whole-number? [n]
   (= n (Math/floor n)))
