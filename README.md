@@ -10,13 +10,13 @@ A Responsive Grid & Typography toolkit for Clojure & Clojurescript. Built on
 
 ## Features
 
-- A minimal grid in a single fn
-- More grids: columnar, container-row-column, golden-grid, fluid-nested-grid, and more.
-- Baseline Grid
-- Typography mixins
+- A grid in a single fn
+- More grids: columnar, container-row-column, fluid-nested-grid, golden-grid
+- Baseline Grid in a single fn
 - Modular Scale, in a single fn
-- Responsive utilities for IPhones, GalaxyPhones, Nexus, IPads, Kindles, and Laptops
 - Viewport Math, in a single fn
+- Typography mixins
+- Responsive utilities for all popular devices
 - Create new DSLs
 
 ## Quickstart
@@ -51,7 +51,9 @@ Add the following to fluid grids:
 
 **Golden Grids**
 
-Coming soon
+```clojure
+(grid/zoomable-baseline-grid 16 24)
+```
 
 **Create new DSLs**
 
@@ -119,7 +121,9 @@ Functional programmer: "Sure, let me build two higher order functions."
 
 ## Examples
 
-Examples include example designs with [Brutha](https://github.com/weavejester/brutha) and Om.
+Examples include example designs with
+[Brutha](https://github.com/weavejester/brutha) and
+[Om](https://github.com/omcljs/om).
 
 Run `examples` with the current mesh src, using figwheel:
 
@@ -128,7 +132,8 @@ Run `examples` with the current mesh src, using figwheel:
 - hello: simple example with Cljs
 - typography: showcase of all grids with Clj (compile to css)
 - grids: showcase of all grids with Clj (compile to css)
-- storyboard: a complex example with Cljs integrated with Om app-states
+
+For a complete example with Om, see [Mala](https://github.com/priyatam/mala).
 
 ## Clojure or Clojurescript?
 
@@ -163,18 +168,18 @@ mesh.dom.insert_styles(app.styles.index)
 You don't need complex build tools like [Webpack](http://webpack.github.io) in
 Clojurescript. Just Convert CSS into data and pass them around as code.
 
-## Templates
+## Template
 
-[Mala](https://github.com/priyatam/mala) is an isomorphic clj/cljs template to
-build SPA with Ring, Om, and Garden
+[Mala](https://github.com/priyatam/mala) is a complete User-Interface lein
+template integrating Om, Core.Async, and Garden with Mesh.
 
 ## Credits
 
 A big thanks to Joel Holbrooks for creating Garden, Chris Coyler for countless
 [CSS-Tricks](https://css-tricks.com), and David Nolen.
 
-Ideas for implementing CSS Grids and Typography are inspired and being ported from
-[Gridism](http://cobyism.com/gridism/),
+Ideas for implementing CSS Grids and Typography are inspired and being ported
+from [Gridism](http://cobyism.com/gridism/),
 [Lost](https://github.com/corysimmons/lost),
 [Golden Grid System](http://goldengridsystem.com),
 [Susy](http://susy.oddbird.net) and other libraries. I learned a lot by studying
@@ -205,7 +210,7 @@ Mesh is currently in the design phase.
 
 ## Status
 
-0.2.x. Unstable. Incomplete, etc.,
+0.2.x. Unstable.
 
 I'm in the process of porting css/sass libraries before settling on the core apis for Clojurescript.
 

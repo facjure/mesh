@@ -1,8 +1,7 @@
 (ns mesh.images
   (:refer-clojure :exclude [+ - * /])
   (:require [garden.core :refer [css]]
-            [garden.units :as u :refer [px pt]]
-            [garden.units :refer (px+ px* px- px-div em)]
+            [garden.units :as u :refer [px pt pc]]
             [garden.color :as color :refer [hsl rgb rgba]]
             [garden.arithmetic :refer [+ - * /]]
             [garden.stylesheet :refer [at-media]]))
@@ -33,3 +32,11 @@
                [:& {:float "none"
                     :margin [[(px 30) 0]]}
                 :img {:margin [[0 "auto"]]}])]]])
+
+(def fluid-media
+  [[:figure {:position "relative"}
+    [:img :object :embed :video {:max-width (pc 100)
+                                 :display "block"}]]
+   [:img {:border 0
+          "-ms-interpolation-mode" "bicubic"}]])
+

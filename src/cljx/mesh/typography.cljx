@@ -62,6 +62,31 @@
    :text-align "left"
    :text-transform (get options :text-transform "none")})
 
+(defn zoomable-baseline-grid
+  "Creates a baseline grid typography with a base body
+   copy and five type scales, with a default 16px. All
+   sizes are calculated in ems"
+  [base-fsize base-lead]
+  (let [base-fem (/ base-fsize 16)
+        base-lem (/ base-lead 16)
+        settings (fn [f l]
+                   {:font-size (em f)
+                    :line-height (em l)})]
+    [[:body ;; 16px/24px
+      (settings (/ base-fsize 16)
+                (/ base-lead base-fsize))]
+     [:.baseline-small  ;; 13px/18px
+      (settings (* base-fsize 0.8125)
+                (/ (* base-lead 0.75) (* base-fsize 0.8125)))]
+     [:.baseline-medium :h3  ;; 16px/24px
+      (settings base-fem base-lem)]
+     [:.baseline-large :h1 :h2 ;; 26/36px
+      (settings (/ 26 16) (/ (* base-lead 1.5) 26))]
+     [:.baseline-xl ;; 42/48px
+      (settings (/ 42 16) (/ (* base-lead 2) 42))]
+     [:.baseline-xxl ;; 68/72px
+      (settings (/ 68 16) (/ (* base-lead 3) 68))]]))
+
 (defn baseline-overlay [color offset]
   ;; TODO: implement a real func in Garden
   (let [linear-gradient (str "linear-gradient(to top, " color " 5%, white 5%)")]
