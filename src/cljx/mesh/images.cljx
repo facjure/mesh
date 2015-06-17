@@ -1,7 +1,7 @@
 (ns mesh.images
   (:refer-clojure :exclude [+ - * /])
   (:require [garden.core :refer [css]]
-            [garden.units :as u :refer [px pt pc]]
+            [garden.units :as u :refer [px pt pc em]]
             [garden.color :as color :refer [hsl rgb rgba]]
             [garden.arithmetic :refer [+ - * /]]
             [garden.stylesheet :refer [at-media]]))
