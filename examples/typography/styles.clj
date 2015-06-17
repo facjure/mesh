@@ -98,7 +98,7 @@
        :line-height (ms -3)}))))
 
 (defstyles typesettings
-  (list typography))
+  typography)
 
 (def index
   typesettings)

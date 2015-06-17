@@ -19,25 +19,23 @@
 (def mono ["Inconsolata" "Menlo" "Courier" "monospace"])
 
 (defstyles printer
-  (list
-   #_(typeset serif
-              (:optima typo/font-families)
-              (:sourcecode-pro typo/font-families))
-   (typo/typeset-html typo/defaults :golden)))
+  #_(typeset serif
+             (:optima typo/font-families)
+             (:sourcecode-pro typo/font-families))
+  (typo/typeset-html typo/defaults :golden))
 
 (defstyles resets
-  (list
-   utils/reset-common-selectors))
+  utils/reset-common-selectors)
+#_(typo/baseline-overlay (:cadetblue color/color-name->hex) 0)
 
 (defstyles grids
-  (list utils/alignments
-        #_(typo/baseline-overlay (:cadetblue color/color-name->hex) 0)
-        (grid/create ".grid" gutter)
-        (grid/wrap-widths 978)
-        (grid/create-nested-units)
-        (grid/nuke-gutters-and-padding)
-        (grid/respond-small (:mobile breakpoints) gutter)
-        (grid/respond-medium (:tablet breakpoints))))
+  utils/alignments
+  (grid/create ".grid" gutter)
+  (grid/wrap-widths 978)
+  (grid/create-nested-units)
+  (grid/nuke-gutters-and-padding)
+  (grid/respond-small (:mobile breakpoints) gutter)
+  (grid/respond-medium (:tablet breakpoints)))
 
 (def bp
   (let [grid-title (defrule grid-title :.grid-title)]
