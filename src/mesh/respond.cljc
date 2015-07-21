@@ -1,9 +1,9 @@
 (ns mesh.respond
   (:refer-clojure :exclude [+ - * / rem])
-  #+cljs
-  (:require-macros [mesh.def :refer [defbreakpoint]])
-  #+clj
-  (:require [mesh.def :refer [defbreakpoint]])
+  #?(:cljs
+     (:require-macros [mesh.def :refer [defbreakpoint]]))
+  #?(:clj
+     (:require [mesh.def :refer [defbreakpoint]]))
   (:require [garden.core :refer [css]]
             [garden.units :as units :refer (px pt em rem dpi)]
             [garden.color :as color :refer [hsl rgb]]

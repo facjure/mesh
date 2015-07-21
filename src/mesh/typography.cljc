@@ -5,13 +5,13 @@
              [garden.units :as units :refer (px pt pc em rem vw)]
              [garden.arithmetic :refer [+ - * /]]
              [garden.stylesheet :refer [at-media]]
-             #+cljs
-             [cljs-numbers.core :refer [ratio? double? zero? pos? neg?]]
              [mesh.respond :as respond]
-             #+clj
-             [mesh.utils :as utils :refer [pow whole-number?]]
-             #+cljs
-             [mesh.utils :as utils :refer [pow viewport-w]]))
+             #?(:cljs
+                [cljs-numbers.core :refer [ratio? double? zero? pos? neg?]])
+             #?(:clj
+                [mesh.utils :as utils :refer [pow whole-number?]])
+             #?(:cljs
+                [mesh.utils :as utils :refer [pow viewport-w]])))
 
 (def font-families
   {:garamond ["\"EB Garamond\"" "Baskerville" "Georgia" "Times" "serif"]
@@ -97,44 +97,44 @@
 ;; http://madebymike.com.au/writing/precise-control-responsive-typography/
 ;; calc(a + (b - x) * ((100vw - d) / (e - f))
 
-#+cljs
-(defn calc [min-font max-font min-width max-width]
-  (println "Viewport size:" (viewport-w))
-  (let [font-diff (+ min-font (- max-font min-font))
-        vp-diff (- (px (viewport-w)) min-width)
-        wid-diff (- max-width min-width)
-        res (* font-diff (/ vp-diff wid-diff))]
-    res))
+#?(:cljs
+   (defn calc [min-font max-font min-width max-width]
+     (println "Viewport size:" (viewport-w))
+     (let [font-diff (+ min-font (- max-font min-font))
+           vp-diff (- (px (viewport-w)) min-width)
+           wid-diff (- max-width min-width)
+           res (* font-diff (/ vp-diff wid-diff))]
+       res)))
 
-#+cljs
-(defn typeset-html [conf scale]
-  [[:html {:font-family (:body-font conf)
-           :font-weight (:body-font-weight conf)
-           :color (:body-color conf)
-           :line-height (em (:line-height-ratio conf))
-           :font-size (:min-font conf)}]
-   (at-media {:min-width (:tablet respond/breakpoints)}
-             [:html {:font-size (calc (:min-font conf)
-                                      (:max-font conf)
-                                      (:min-width conf)
-                                      (:max-width conf))}])
-   (at-media {:min-width (:laptop respond/breakpoints)}
-             [:html {:font-size (calc (:min-font conf)
-                                      (:max-font conf)
-                                      (:min-width conf)
-                                      (:max-width conf))}])
-   (at-media {:min-width (:max-width conf)}
-             [:html {:font-size (:max-font conf)}])])
+#?(:cljs
+   (defn typeset-html [conf scale]
+     [[:html {:font-family (:body-font conf)
+              :font-weight (:body-font-weight conf)
+              :color (:body-color conf)
+              :line-height (em (:line-height-ratio conf))
+              :font-size (:min-font conf)}]
+      (at-media {:min-width (:tablet respond/breakpoints)}
+                [:html {:font-size (calc (:min-font conf)
+                                         (:max-font conf)
+                                         (:min-width conf)
+                                         (:max-width conf))}])
+      (at-media {:min-width (:laptop respond/breakpoints)}
+                [:html {:font-size (calc (:min-font conf)
+                                         (:max-font conf)
+                                         (:min-width conf)
+                                         (:max-width conf))}])
+      (at-media {:min-width (:max-width conf)}
+                [:html {:font-size (:max-font conf)}])]))
 
-#+clj
-(defn typeset-html [conf scale]
-  [[:html {:font-family (:body-font conf)
-           :font-weight (:body-font-weight conf)
-           :color (:body-color conf)
-           :line-height (em (:line-height-ratio conf))
-           :font-size (:min-font conf)}]
-   (at-media {:min-width (:min-width conf)}
-             [:html {:font-size (* (scale scales) (:min-font conf))}])])
+#?(:clj
+   (defn typeset-html [conf scale]
+     [[:html {:font-family (:body-font conf)
+              :font-weight (:body-font-weight conf)
+              :color (:body-color conf)
+              :line-height (em (:line-height-ratio conf))
+              :font-size (:min-font conf)}]
+      (at-media {:min-width (:min-width conf)}
+                [:html {:font-size (* (scale scales) (:min-font conf))}])]))
 
 (def reset
   {:margin 0
@@ -160,32 +160,32 @@
    [:header (font serif 4 700 0.3 1.2 "small-caps")]
    [:footer (font sans 1 100 0.3 1.2)]])
 
-#+clj
-(defn modular-scale-fn [base ratio]
-  (let [[up down] (if (ratio? ratio)
-                    (if (< (denominator ratio)
-                           (numerator ratio))
-                      [* /]
-                      [/ *])
-                    (if (< 1 ratio)
-                      [* /]
-                      [/ *]))
-        f (float ratio)
-        us (iterate #(up % f) base)
-        ds (iterate #(down % f) base)]
-    (memoize
-     (fn ms [n]
-       (cond
-         (< 0 n) (if (whole-number? n)
-                   (nth us n)
-                   (let [m (Math/floor (float n))
-                         [a b] [(ms m) (ms (inc m))]]
-                     (+ a (* (Math/abs (- a b))
-                             (- n m)))))
-         (< n 0) (if (whole-number? n)
-                   (nth ds (Math/abs n))
-                   (let [m (Math/floor (float n))
-                         [a b] [(ms m) (ms (dec m))]]
-                     (+ a (* (Math/abs (- a b))
-                             (- n m)))))
-         :else base)))))
+#?(:clj
+   (defn modular-scale-fn [base ratio]
+     (let [[up down] (if (ratio? ratio)
+                       (if (< (denominator ratio)
+                              (numerator ratio))
+                         [* /]
+                         [/ *])
+                       (if (< 1 ratio)
+                         [* /]
+                         [/ *]))
+           f (float ratio)
+           us (iterate #(up % f) base)
+           ds (iterate #(down % f) base)]
+       (memoize
+        (fn ms [n]
+          (cond
+            (< 0 n) (if (whole-number? n)
+                      (nth us n)
+                      (let [m (Math/floor (float n))
+                            [a b] [(ms m) (ms (inc m))]]
+                        (+ a (* (Math/abs (- a b))
+                                (- n m)))))
+            (< n 0) (if (whole-number? n)
+                      (nth ds (Math/abs n))
+                      (let [m (Math/floor (float n))
+                            [a b] [(ms m) (ms (dec m))]]
+                        (+ a (* (Math/abs (- a b))
+                                (- n m)))))
+            :else base))))))
