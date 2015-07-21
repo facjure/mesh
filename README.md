@@ -13,8 +13,9 @@ A Responsive Grid & Typography toolkit for Clojure & Clojurescript. Built on
 - A grid in a single fn
 - More grids: columnar, container-row-column, fluid-nested-grid, golden-grid
 - Baseline Grid in a single fn
-- Modular Scale, in a single fn
-- Viewport Math, in a single fn
+- Modular Scale in a single fn
+- Baseline Typography
+- Viewport Math in a single fn
 - Typography mixins
 - Responsive utilities for all popular devices
 - Create new DSLs
@@ -49,7 +50,7 @@ Add the following to fluid grids:
 (grid/create-nested-units)
 ```
 
-**Golden Grids**
+**Baseline Typpography**
 
 ```clojure
 (grid/zoomable-baseline-grid 16 24)
@@ -65,7 +66,6 @@ Designer: Make the headings `serifs` and `scale-types` using four `breakpoints`
 (take 480 px increments). And yes, use our brand settings.
 
 ```clojure
-
 (def settings
   {:min-width (px 400)
    :max-width (px 1200)
@@ -133,7 +133,7 @@ Run `examples` with the current mesh src, using figwheel:
 - typography: showcase of all grids with Clj (compile to css)
 - grids: showcase of all grids with Clj (compile to css)
 
-For a complete example with Om, see [Mala](https://github.com/priyatam/mala).
+For a complete user-interface design with Om, see [Mala](https://github.com/priyatam/mala).
 
 ## Clojure or Clojurescript?
 
@@ -210,7 +210,7 @@ Mesh is currently in the design phase.
 
 ## Status
 
-0.2.x. Unstable.
+0.3.x. Unstable.
 
 I'm in the process of porting css/sass libraries before settling on the core apis for Clojurescript.
 
