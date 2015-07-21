@@ -208,11 +208,13 @@ explore grid libraries in Sass, Less, and Stylus.
 
 Mesh is currently in the design phase. 
 
+I'm in the process of porting css/sass libraries before settling on the core apis for Clojurescript. Feel free to use the early versions below for prototyping and provide feedback via github issues.
+
 ## Status
 
-0.3.x. Unstable.
+Unstable.
 
-I'm in the process of porting css/sass libraries before settling on the core apis for Clojurescript.
+[![Clojars Project](http://clojars.org/facjure/mesh/latest-version.svg)](http://clojars.org/facjure/mesh)
 
 ## License
 
