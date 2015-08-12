@@ -5,7 +5,6 @@
             [garden.units :as u :refer [px pt em]]
             [garden.arithmetic :refer [+ - * /]]
             [gardener.respond :as respond]
-            [mesh.utils :as utils]
             [mesh.typography :as typo :refer [typeset vr-block scales]]
             [mesh.typesetting :as typesetting :refer [scale-type make-serifs]]
             [mesh.grid :as grid]))

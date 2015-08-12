@@ -7,6 +7,7 @@
             [garden.arithmetic :refer [+ - * /]]
             [gardener.images :as images]
             [gardener.respond :as respond :refer [breakpoints]]
+            [gardener.resets :as resets]
             [mesh.utils :as utils]
             [mesh.typography :as typo :refer [typeset vr-block]]
             [mesh.typesetting :as typesetting :refer [scale-type make-serifs]]
@@ -24,8 +25,8 @@
              (:sourcecode-pro typo/font-families))
   (typo/typeset-html typo/defaults :golden))
 
-(defstyles resets
-  utils/reset-common-selectors)
+(defstyles reset
+  resets/reset-common-selectors)
 #_(typo/baseline-overlay (:cadetblue color/color-name->hex) 0)
 
 (defstyles grids
@@ -43,4 +44,4 @@
      (grid-title {:font-size 10}))))
 
 (def index
-  (merge grids printer bp resets))
+  (merge grids printer bp reset))

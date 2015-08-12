@@ -1,9 +1,7 @@
 (ns examples.grids.page
   (:require [om.core :as om :include-macros true]
             [om.dom :as dom :include-macros true]
-            [sablono.core :as html :refer-macros [html]]
-            [mesh.utils :as utils]
-            [mesh.dom :as mesh-dom]))
+            [sablono.core :as html :refer-macros [html]]))
 
 (enable-console-print!)
 

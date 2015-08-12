@@ -9,9 +9,10 @@
              #?(:cljs
                 [cljs-numbers.core :refer [ratio? double? zero? pos? neg?]])
              #?(:clj
-                [mesh.utils :as utils :refer [pow whole-number?]])
-             #?(:cljs
-                [mesh.utils :as utils :refer [pow viewport-w]])))
+                [gardener.math :as utils :refer [pow whole-number?]])
+             #?@(:cljs
+                 [[gardener.math :as utils :refer [pow]]
+                  [mesh.utils :refer [viewport-w]]])))
 
 (def font-families
   {:garamond ["\"EB Garamond\"" "Baskerville" "Georgia" "Times" "serif"]

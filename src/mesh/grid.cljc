@@ -7,7 +7,8 @@
             [garden.arithmetic :refer [+ - * /]]
             [garden.stylesheet :refer [at-media]]
             [gardener.respond :as respond]
-            [mesh.utils :refer [border-box clearfix reset-padding]]))
+            [gardener.resets :refer [clearfix reset-padding]]
+            [gardener.box :refer [border-box]]))
 
 (defn initialize [clazz gutter]
   "Define a unit within grid with a gutter in px"

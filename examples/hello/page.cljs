@@ -4,7 +4,7 @@
             [garden.core :refer [css]]
             [garden.units :as u :refer [px pt em]]
             [garden.color :as color :refer [hsl rgb]]
-            [mesh.dom :as mesh-dom]
+            [gardener.dom :as gardom]
             [mesh.typography :as typo :refer [typeset]]
             [mesh.grid :as grid]))
 
@@ -79,4 +79,4 @@
 
 (react/mount (grids dummy-text) (js/document.getElementById "hello"))
 
-(mesh-dom/insert-styles styles)
+(gardom/insert-styles styles)
