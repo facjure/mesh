@@ -5,9 +5,9 @@
             [garden.units :as u :refer [px pt em]]
             [garden.color :as color :refer [hsl rgb]]
             [garden.arithmetic :refer [+ - * /]]
+            [gardener.images :as images]
+            [gardener.respond :as respond :refer [breakpoints]]
             [mesh.utils :as utils]
-            [mesh.images :as images]
-            [mesh.respond :as respond :refer [breakpoints]]
             [mesh.typography :as typo :refer [typeset vr-block]]
             [mesh.typesetting :as typesetting :refer [scale-type make-serifs]]
             [mesh.grid :as grid]))

@@ -6,7 +6,7 @@
             [garden.color :as color :refer [hsl rgb]]
             [garden.arithmetic :refer [+ - * /]]
             [garden.stylesheet :refer [at-media]]
-            [mesh.respond :as respond]
+            [gardener.respond :as respond]
             [mesh.utils :refer [border-box clearfix reset-padding]]))
 
 (defn initialize [clazz gutter]
