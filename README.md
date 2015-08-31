@@ -2,7 +2,8 @@ Mesh
 ====
 
 A Responsive Grid & Typography toolkit for Clojure & Clojurescript. Built on
-[Garden](https://github.com/noprompt/garden).
+[Garden](https://github.com/noprompt/garden), and
+[Gardener](https://github.com/facjure/gardener).
 
 ## Rationale
 
@@ -11,13 +12,12 @@ A Responsive Grid & Typography toolkit for Clojure & Clojurescript. Built on
 ## Features
 
 - A grid in a single fn
-- More grids: columnar, container-row-column, fluid-nested-grid, golden-grid
+- Available grids: columnar, container-row-column, fluid-nested-grid, golden-grid
 - Baseline Grid in a single fn
 - Modular Scale in a single fn
-- Baseline Typography
 - Viewport Math in a single fn
-- Typography mixins
-- Responsive utilities for all popular devices
+- Baseline Typography
+- Typography mixins, and responsive utilities with gardener.
 - Create new DSLs
 
 ## Quickstart
@@ -171,7 +171,7 @@ Clojurescript. Just Convert CSS into data and pass them around as code.
 ## Template
 
 [Mala](https://github.com/priyatam/mala) is a complete User-Interface lein
-template integrating Om, Core.Async, and Garden with Mesh.
+template integrating Om, Core.Async, and Mesh.
 
 ## Credits
 
@@ -180,19 +180,15 @@ A big thanks to Joel Holbrooks for creating Garden, Chris Coyler for countless
 
 Ideas for implementing CSS Grids and Typography are inspired and being ported
 from [Gridism](http://cobyism.com/gridism/),
-[Lost](https://github.com/corysimmons/lost),
-[Golden Grid System](http://goldengridsystem.com),
-[Susy](http://susy.oddbird.net) and other libraries. I learned a lot by studying
-the source of these libraries, and borrowed ideas from them. Starting this
-library would have been much harder without the work of these designers.
+[Lost](https://github.com/corysimmons/lost), [Golden Grid
+System](http://goldengridsystem.com), and other libraries. I learned a lot by
+studying the source of these libraries, and borrowed ideas from them. Starting
+this library would have been much harder without the work of these designers.
 
 ## References
 
-_Presentations:_
 - [Clojure/West Presentation](https://www.youtube.com/watch?v=-jnJGNDoSXc)
-- [Lisp Interview](http://www.lispcast.com/pre-west-priyatam-mudivarti)
-
-_Articles & Books_
+- [LispCast Interview](http://www.lispcast.com/pre-west-priyatam-mudivarti)
 - [Grid Systems in Graphic Design](http://www.amazon.com/Grid-Systems-Graphic-Design-Communication/dp/3721201450)
 by Josef Müller-Brockmann is a classic
 - [Thinking grids](https://github.com/priyatam/thinking-grids) is my reference to
@@ -208,7 +204,9 @@ explore grid libraries in Sass, Less, and Stylus.
 
 Mesh is currently in the design phase. 
 
-I'm in the process of porting css/sass libraries before settling on the core apis for Clojurescript. Feel free to use the early versions below for prototyping and provide feedback via github issues.
+I'm in the process of porting css/sass libraries before settling on the core
+apis. Feel free to use the early versions below for prototyping and provide
+feedback via github issues.
 
 ## Status
 
@@ -218,6 +216,6 @@ Unstable.
 
 ## License
 
-Copyright © 2015 Facjure LLC.
+Copyright © 2015 Facjure, LLC.
 
 Released under the Eclipse Public License, same as Clojure.
