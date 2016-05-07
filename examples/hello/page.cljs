@@ -4,7 +4,7 @@
             [garden.core :refer [css]]
             [garden.units :as u :refer [px pt em]]
             [garden.color :as color :refer [hsl rgb]]
-            [gardener.dom :as gardom]
+            [mesh.core.dom :as gardom]
             [mesh.typography :as typo :refer [typeset]]
             [mesh.grid :as grid]))
 
