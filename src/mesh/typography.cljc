@@ -190,3 +190,27 @@
                         (+ a (* (Math/abs (- a b))
                                 (- n m)))))
             :else base))))))
+
+;; Experimental DSL
+
+(defn make-serifs [selector families]
+  (fn [declarations]
+    (let [styles (selector declarations)]
+      (conj styles (font (:ff-sans families) 2 400 0.5 1.45)))))
+
+(defn scale-type [selector params]
+  (fn [declarations]
+    (let [styles (selector declarations)]
+      (conj styles
+            (at-media {:min-width (get-in params [:breakpoints :mobile])}
+                      [:& {:font-size (* 1.5 (:min-font params))}])
+            (at-media {:min-width (get-in params [:breakpoints :tablet])}
+                      [:& {:font-size (* 2 (:min-font params))}])
+            (at-media {:min-width (get-in params [:breakpoints :laptop])}
+                      [:& {:font-size (* 2.5 (:min-font params))}])))))
+
+
+(defn leading [selector lead]
+  (fn [declarations]
+    (let [styles (selector declarations)]
+      (conj styles {:line-height (em lead)}))))
