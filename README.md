@@ -1,9 +1,9 @@
 Mesh
 ====
 
-A Responsive Grid & Typography toolkit for Clojure & Clojurescript. Built on
-[Garden](https://github.com/noprompt/garden), and
-[Gardener](https://github.com/facjure/gardener).
+A Responsive Grid & Typography toolkit for Clojure & Clojurescript. 
+
+Built on [Garden](https://github.com/noprompt/garden), and soon React.
 
 ## Rationale
 
@@ -175,7 +175,7 @@ template integrating Om, Core.Async, and Mesh.
 
 ## Credits
 
-A big thanks to Joel Holbrooks for creating Garden, Chris Coyler for countless
+Thanks, Joel Holbrooks for creating Garden, Chris Coyler for countless
 [CSS-Tricks](https://css-tricks.com), and David Nolen.
 
 Ideas for implementing CSS Grids and Typography are inspired and being ported
@@ -202,20 +202,17 @@ explore grid libraries in Sass, Less, and Stylus.
 
 ## Contributing
 
-Mesh is currently in the design phase. 
-
-I'm in the process of porting css/sass libraries before settling on the core
-apis. Feel free to use the early versions below for prototyping and provide
-feedback via github issues.
+Mesh is currently in the development phase, active after eights month of
+research and design. I will be open to contributions during Alpha.
 
 ## Status
 
-Unstable.
+Development.
 
 [![Clojars Project](http://clojars.org/facjure/mesh/latest-version.svg)](http://clojars.org/facjure/mesh)
 
 ## License
 
-Copyright © 2015 Facjure, LLC.
+Copyright © 2015-2016 Facjure, LLC.
 
-Released under the Eclipse Public License, same as Clojure.
+Released under the Eclipse Public License, same as Clojure & Clojurescript.
