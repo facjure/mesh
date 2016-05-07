@@ -6,9 +6,9 @@
             [garden.color :as color :refer [hsl rgb]]
             [garden.arithmetic :refer [+ - * /]]
             [garden.stylesheet :refer [at-media]]
-            [gardener.respond :as respond]
-            [gardener.resets :refer [clearfix reset-padding]]
-            [gardener.box :refer [border-box]]))
+            [mesh.core.respond :as respond]
+            [mesh.core.resets :refer [clearfix reset-padding]]
+            [mesh.core.box :refer [border-box]]))
 
 (defn initialize [clazz gutter]
   "Define a unit within grid with a gutter in px"

@@ -5,13 +5,13 @@
              [garden.units :as units :refer (px pt pc em rem vw)]
              [garden.arithmetic :refer [+ - * /]]
              [garden.stylesheet :refer [at-media]]
-             [gardener.respond :as respond]
+             [mesh.core.respond :as respond]
              #?(:cljs
                 [cljs-numbers.core :refer [ratio? double? zero? pos? neg?]])
              #?(:clj
-                [gardener.math :as utils :refer [pow whole-number?]])
+                [mesh.core.math :as utils :refer [pow whole-number?]])
              #?@(:cljs
-                 [[gardener.math :as utils :refer [pow]]
+                 [[mesh.core.math :as utils :refer [pow]]
                   [mesh.utils :refer [viewport-w]]])))
 
 (def font-families

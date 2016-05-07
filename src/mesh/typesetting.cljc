@@ -5,7 +5,7 @@
              [garden.units :as units :refer (px pt pc em rem vw)]
              [garden.arithmetic :refer [+ - * /]]
              [garden.stylesheet :refer [at-media]]
-             [gardener.respond :as respond]
+             [mesh.core.respond :as respond]
              [mesh.typography :as typography]))
 
 ;; Experimental DSL
