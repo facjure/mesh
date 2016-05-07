@@ -8,9 +8,8 @@
             [mesh.core.images :as images]
             [mesh.core.respond :as respond :refer [breakpoints]]
             [mesh.core.resets :as resets]
-            [mesh.utils :as utils]
-            [mesh.typography :as typo :refer [typeset vr-block]]
-            [mesh.typesetting :as typesetting :refer [scale-type make-serifs]]
+            [mesh.core.utils :as utils]
+            [mesh.typography :as typo :refer [typeset vr-block scale-type make-serifs]]
             [mesh.grid :as grid]))
 
 (def gutter (px 20))

@@ -12,7 +12,7 @@
                 [mesh.core.math :as utils :refer [pow whole-number?]])
              #?@(:cljs
                  [[mesh.core.math :as utils :refer [pow]]
-                  [mesh.utils :refer [viewport-w]]])))
+                  [mesh.core.utils :refer [viewport-w]]])))
 
 (def font-families
   {:garamond ["\"EB Garamond\"" "Baskerville" "Georgia" "Times" "serif"]

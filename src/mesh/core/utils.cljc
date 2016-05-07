@@ -1,4 +1,4 @@
-(ns mesh.utils
+(ns mesh.core.utils
   (:require [garden.core :refer [css]]))
 
 #?(:cljs
