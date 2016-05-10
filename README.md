@@ -53,7 +53,7 @@ Add the following to fluid grids:
 **Baseline Typpography**
 
 ```clojure
-(grid/zoomable-baseline-grid 16 24)
+(typography/zoomable-baseline-grid 16 24)
 ```
 
 **Create new DSLs**
