@@ -1,4 +1,4 @@
-(defproject facjure/mesh "0.5.1-SNAPSHOT"
+(defproject facjure/mesh "0.5.1"
   :description "A toolkit for responsive grids and typography"
   :url "https://github.com/facjure/mesh"
   :license {:name "Eclipse Public License"
