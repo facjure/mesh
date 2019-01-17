@@ -16,7 +16,7 @@
   :clean-targets ^{:protect false} ["resources/public/js" "target/classes"]
   :cljsbuild {:builds
               [{:id "dev"
-                :source-paths ["examples" "env/dev"]
+                :source-paths ["examples"]
                 :compiler {:main dev.repl
                            :output-to "resources/public/js/mesh.js"
                            :output-dir "resources/public/js/out"
