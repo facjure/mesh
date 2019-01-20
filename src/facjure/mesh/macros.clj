@@ -1,6 +1,5 @@
-(ns mesh.core.def
+(ns facjure.mesh.macros
   (:require [garden.types]
-            [garden.util :as util]
             [garden.core]
             [garden.stylesheet :refer [at-media]])
   (:import garden.types.CSSFunction

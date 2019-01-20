@@ -1,4 +1,4 @@
-(ns mesh.grid
+(ns facjure.mesh.grid
   (:refer-clojure :exclude [+ - * /])
   (:require [garden.core :refer [css]]
             [garden.units :as u :refer [px pt pc]]
@@ -6,9 +6,8 @@
             [garden.color :as color :refer [hsl rgb]]
             [garden.arithmetic :refer [+ - * /]]
             [garden.stylesheet :refer [at-media]]
-            [mesh.core.respond :as respond]
-            [mesh.core.resets :refer [clearfix reset-padding]]
-            [mesh.core.box :refer [border-box]]))
+            [facjure.mesh.media :as media]
+            [facjure.mesh.core :refer [border-box clearfix reset-padding]]))
 
 (defn initialize [clazz gutter]
   "Define a unit within grid with a gutter in px"
@@ -100,7 +99,7 @@
         (initialize clazz gutter)
         (create-fractions clazz)))
 
-(defn respond-small [width gutter]
+(defn media-small [width gutter]
   (at-media {:screen true :max-width width}
             [".grid:not(.no-stacking-on-mobiles)"
              [:>
@@ -114,7 +113,7 @@
             [:.center-on-mobiles {:text-align "center !important"}]
             [:.hide-on-mobiles {:display "none !important"}]))
 
-(defn respond-medium [width]
+(defn media-medium [width]
   (at-media {:screen true :min-width width}
             [:.wider
              [:.grid {:max-width width
@@ -125,11 +124,11 @@
 (def container
   (list
    [:& clearfix]
-   (respond/mobile)
-   (respond/phablet)
-   (respond/tablet)
-   (respond/desktop)
-   (respond/hd)))
+   (media/mobile)
+   (media/phablet)
+   (media/tablet)
+   (media/desktop)
+   (media/hd)))
 
 (defn offset [n]
   (let [m (min (max 0 n) 12)]

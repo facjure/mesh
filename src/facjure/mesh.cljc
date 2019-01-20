@@ -1,4 +1,4 @@
-(ns mesh
+(ns facjure.mesh
   (:require [garden.compiler :as compiler]
             [garden.util :as util]
             [garden.types]

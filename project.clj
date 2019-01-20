@@ -16,17 +16,17 @@
   :clean-targets ^{:protect false} ["resources/public/js" "target/classes"]
   :cljsbuild {:builds
               [{:id "dev"
-                :source-paths ["examples"]
-                :compiler {:main dev.repl
+                :source-paths ["examples" "dev"]
+                :compiler {:main repl
                            :output-to "resources/public/js/mesh.js"
                            :output-dir "resources/public/js/out"
                            :asset-path "js/out"
                            :optimizations :none
-                           :cache-analysis true
-                           :source-map true
+                           :source-map-timestamp true
                            :install-deps true
                            :npm-deps {:create-react-class "15.6.0"}
-                           :preloads [devtools.preload]}}
+                           :preloads [devtools.preload]}
+                 :figwheel {}}
                {:id "prod"
                         :source-paths ["src"]
                         :compiler {:output-to "dist/mesh.min.js"
@@ -34,7 +34,7 @@
                                    :pretty-print false}}]}
   :garden {:builds
            [{:id "typography"
-             :source-paths ["src" "examples"]
+             :source-paths [x"examples"]
              :stylesheet typography.styles/index
              :compiler {:output-to "resources/public/css/typography.css"
                         :pretty-print true}}
@@ -55,14 +55,15 @@
 
   :profiles {:dev
              {:dependencies [[cider/piggieback "0.3.10" :exclude [org.clojure/tools.nrepl]]
+                             [binaryage/devtools "0.9.9"]
                              [figwheel-sidecar "0.5.16"]
-                             [binaryage/devtools "0.9.10"]
-                             [reagent "0.8.1"]]
+                             [sablono "0.3.4"]
+                             [org.omcljs/om "0.9.0"]]
               :figwheel {:http-server-root "public"
                          :server-port 3449
                          :nrepl-port 7888
                          :css-dirs ["resources/public/css"]
-                         :open-file-command "emacsclient"}}}
+                         }}}
   :aliases {"init"  ["pdo" "clean," "garden" "clean"]
             "dev" ["pdo" "garden" "auto," "figwheel"]
             "release" ["pdo" "clean," "cljsbuild" "once" "prod"]})

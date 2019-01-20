@@ -1,18 +1,17 @@
-(ns mesh.typography
+(ns facjure.mesh.typography
   (:refer-clojure :exclude [+ - * / rem])
   (:require  [garden.compiler :refer [render-css]]
              [garden.core :refer [css]]
              [garden.units :as units :refer (px pt pc em rem vw)]
              [garden.arithmetic :refer [+ - * /]]
              [garden.stylesheet :refer [at-media]]
-             [mesh.core.respond :as respond]
+             [facjure.mesh.media :as media]
              #?(:cljs
                 [cljs-numbers.core :refer [ratio? double? zero? pos? neg?]])
              #?(:clj
-                [mesh.core.math :as utils :refer [pow whole-number?]])
+                [facjure.mesh.core :as core :refer [pow whole-number?]])
              #?@(:cljs
-                 [[mesh.core.math :as utils :refer [pow]]
-                  [mesh.core.utils :refer [viewport-w]]])))
+                 [[facjure.mesh.core :as core :refer [pow viewport-w]]])))
 
 (def font-families
   {:garamond ["\"EB Garamond\"" "Baskerville" "Georgia" "Times" "serif"]
@@ -114,12 +113,12 @@
               :color (:body-color conf)
               :line-height (em (:line-height-ratio conf))
               :font-size (:min-font conf)}]
-      (at-media {:min-width (:tablet respond/breakpoints)}
+      (at-media {:min-width (:tablet media/breakpoints)}
                 [:html {:font-size (calc (:min-font conf)
                                          (:max-font conf)
                                          (:min-width conf)
                                          (:max-width conf))}])
-      (at-media {:min-width (:laptop respond/breakpoints)}
+      (at-media {:min-width (:laptop media/breakpoints)}
                 [:html {:font-size (calc (:min-font conf)
                                          (:max-font conf)
                                          (:min-width conf)
