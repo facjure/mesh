@@ -4,9 +4,9 @@
             [garden.core :refer [css]]
             [garden.units :as u :refer [px pt em]]
             [garden.arithmetic :refer [+ - * /]]
-            [mesh.core.respond :as respond]
-            [mesh.typography :as typo :refer [typeset vr-block scales scale-type make-serifs]]
-            [mesh.grid :as grid]))
+            [facjure.mesh.media :as respond]
+            [facjure.mesh.typography :as typo :refer [typeset vr-block scales scale-type make-serifs]]
+            [facjure.mesh.grid :as grid]))
 
 (def alegreya ["Alegreya" "Baskerville" "Georgia" "Times" "serif"])
 (def sans ["\"Open Sans\"" "Avenir" "Helvetica" "sans-serif"])

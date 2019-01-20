@@ -1,15 +1,22 @@
 Mesh
 ====
 
-A Responsive Grid & Typography toolkit for Clojure & Clojurescript. 
+A Responsive Grid & Web Typography toolkit for Clojure & Clojurescript. 
 
-Built on [Garden](https://github.com/noprompt/garden), and soon React.
+Built on [Garden](https://github.com/noprompt/garden).
 
 ## Rationale
 
 > Web Design is 95% Typography - iA
 
 ## Features
+
+My current priority is to build a Clojurescript interface to [CSS
+Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/grid), [CSS
+Animations](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations)
+specs in the context of Typography and Graphic Design.
+
+Early research includes expressing:
 
 - A grid in a single fn
 - Available grids: columnar, container-row-column, fluid-nested-grid, golden-grid
@@ -21,6 +28,8 @@ Built on [Garden](https://github.com/noprompt/garden), and soon React.
 - Create new DSLs
 
 ## Quickstart
+
+Early prototypes:
 
 **A simple 8-column grid** with `col-x` classes:
 
@@ -121,19 +130,14 @@ Functional programmer: "Sure, let me build two higher order functions."
 
 ## Examples
 
-Examples include example designs with
-[Brutha](https://github.com/weavejester/brutha) and
-[Om](https://github.com/omcljs/om).
+Examples include example designs with [Om](https://github.com/omcljs/om) and soon Reagent.
 
 Run `examples` with the current mesh src, using figwheel:
 
 	lein dev
 
-- hello: simple example with Cljs
 - typography: showcase of all grids with Clj (compile to css)
 - grids: showcase of all grids with Clj (compile to css)
-
-For a complete user-interface design with Om, see [Mala](https://github.com/priyatam/mala).
 
 ## Clojure or Clojurescript?
 
@@ -168,22 +172,14 @@ mesh.dom.insert_styles(app.styles.index)
 You don't need complex build tools like [Webpack](http://webpack.github.io) in
 Clojurescript. Just Convert CSS into data and pass them around as code.
 
-## Template
-
-[Mala](https://github.com/priyatam/mala) is a complete User-Interface lein
-template integrating Om, Core.Async, and Mesh.
-
 ## Credits
 
-Thanks, Joel Holbrooks for creating Garden, Chris Coyler for countless
-[CSS-Tricks](https://css-tricks.com), and David Nolen.
+Joel Holbrooks for creating Garden, Chris Coyler for countless
+[CSS-Tricks](https://css-tricks.com).
 
-Ideas for implementing CSS Grids and Typography are inspired and being ported
-from [Gridism](http://cobyism.com/gridism/),
-[Lost](https://github.com/corysimmons/lost), [Golden Grid
-System](http://goldengridsystem.com), and other libraries. I learned a lot by
-studying the source of these libraries, and borrowed ideas from them. Starting
-this library would have been much harder without the work of these designers.
+I learned a lot by studying the source of multiple libraries (see references),
+and may have borrowed ideas from them. Starting this library would have been
+much harder without the work of these designers.
 
 ## References
 
@@ -199,11 +195,14 @@ explore grid libraries in Sass, Less, and Stylus.
 - [OOCS](http://oocss.org/grids_docs.html)
 - [The magic of Bootstrap Grids](http://www.helloerik.com/the-subtle-magic-behind-why-the-bootstrap-3-grid-works)
 - [Understanding Susy's Grids](http://www.zell-weekeat.com/susy2-tutorial)
+- [Golden Grid System](http://goldengridsystem.com)
+- [Gridism](http://cobyism.com/gridism/)
+- [Lost](https://github.com/corysimmons/lost) 
 
 ## Contributing
 
-Mesh is currently in the development phase, active after eights month of
-research and design. I will be open to contributions during Alpha.
+Mesh is currently in the development phase. I will be open to contributions
+during Alpha.
 
 ## Status
 
@@ -213,6 +212,6 @@ Development.
 
 ## License
 
-Copyright © 2015-2016 Facjure, LLC.
+Copyright © 2015-2019 Facjure, LLC.
 
 Released under the Eclipse Public License, same as Clojure & Clojurescript.
